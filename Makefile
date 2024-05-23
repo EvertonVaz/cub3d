@@ -1,21 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/22 12:10:30 by egeraldo          #+#    #+#              #
-#    Updated: 2024/05/23 14:38:05 by egeraldo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
-
-NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror -g3
-RFLAGS = -O3 -ffast-math -fno-stack-protector
-MFLAGS = -Iinclude -ldl -lglfw -pthread -lm
+NAME		:= cub3d
+CC			:= gcc
+CFLAGS		:= -Wextra -Wall -Werror -g3
 
 # Colors Definition
 BLUE = "\033[34;1m"
@@ -26,44 +11,34 @@ WHITE = "\033[37;1;4m"
 COLOR_LIMITER = "\033[0m"
 
 # Paths for libraries
-BIN_PATH = ./bin/
-MANDATORY_SOURCES_PATH = ./src/
-LIBS_PATH = ./libs
+LIBMLX_PATH		:= ./libs/MLX42
+LIBFT_PATH		:= ./libs/libft/
+BIN_PATH		:= ./bin/
+LIBFT			:= libft.a
 
-MLX_PATH = $(LIBS_PATH)/MLX42
-MLX = $(MLX_PATH)/build/libmlx42.a
+HEADERS			:= -I ./cub3d.h -I $(LIBMLX_PATH)/include -I ./libft
+LIBS			:= $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT_PATH)$(LIBFT)
+SRCS			:= $(addprefix ./src/, test.c)
+OBJS			:= $(patsubst ./src/%.c,$(BIN_PATH)%.o,$(SRCS))
 
-LIBFT_PATH = $(LIBS_PATH)/libft
-LIBFT = $(LIBFT_PATH)/libft.a
 
-INCLUDES_PATH = -I ./include -I $(MLX_PATH)/include/MLX42 -I $(LIBFT_PATH)
+all: $(LIBFT_PATH)$(LIBFT) $(LIBMLX_PATH)/build/libmlx42.a $(BIN_PATH) $(NAME)
 
-MANDATORY_SOURCES = \
-	test.c
+$(LIBFT_PATH)$(LIBFT):
+	@make -sC ./libft
 
-OBJECTS = $(addprefix $(BIN_PATH), $(MANDATORY_SOURCES:%.c=%.o))
-
-all: libft $(BIN_PATH) $(NAME)
-
-libft:
-ifeq ($(wildcard $(LIBFT)),)
-	@make -C $(LIBFT_PATH) --no-print-directory
-	@echo $(CYAN)" --------------------------------------"$(COLOR_LIMITER)
-	@echo $(CYAN)"|  LIBFT  Was Compiled Successfully!! |"$(COLOR_LIMITER)
-	@echo $(CYAN)"--------------------------------------"$(COLOR_LIMITER)
-	@echo " "
-endif
-
-$(BIN_PATH)%.o: $(MANDATORY_SOURCES_PATH)%.c
+$(LIBMLX_PATH)/build/libmlx42.a:
+	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4 && printf "\n"
+	
+$(BIN_PATH)%.o: ./src/%.c
 	@echo $(BLUE)[Compiling cub3D]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES_PATH)
-	@echo " "
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\n"
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJS)
 	@echo $(CYAN)" --------------------------------------------------"$(COLOR_LIMITER)
-	@echo $(CYAN)"| cub3D executable was created successfully!! |"$(COLOR_LIMITER)
+	@echo $(CYAN)"|   cub3D executable was created successfully!!   |"$(COLOR_LIMITER)
 	@echo $(CYAN)"--------------------------------------------------"$(COLOR_LIMITER)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES_PATH) $(MLX) -L $(LIBFT) -lft
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 	@echo " "
 
 $(BIN_PATH):
@@ -71,14 +46,16 @@ $(BIN_PATH):
 
 clean:
 	@echo $(RED)[Removing Objects]$(COLOR_LIMITER)
-	@make fclean -C $(LIBFT_PATH) --no-print-directory
 	@rm -rf $(BIN_PATH)
+	@make clean -sC ./libs/libft --no-print-directory
 
 fclean: clean
 	@echo $(RED)[Removing $(NAME) executable]$(COLOR_LIMITER)
+	@rm -rf ./libft/libft.a
+	@rm -rf $(LIBMLX_PATH)/build
 	@rm -rf $(NAME)
 
-re: fclean
-	@make --no-print-directory
 
-.PHONY: all clean fclean re bonus
+re: fclean all
+
+.PHONY: all clean fclean re
