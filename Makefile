@@ -6,14 +6,16 @@
 #    By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 12:10:30 by egeraldo          #+#    #+#              #
-#    Updated: 2024/05/22 14:42:55 by egeraldo         ###   ########.fr        #
+#    Updated: 2024/05/23 14:38:05 by egeraldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 NAME = cub3D
-CFLAGS =  -g3 -Wunreachable-code #-Ofast -Wextra -Wall -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
+RFLAGS = -O3 -ffast-math -fno-stack-protector
+MFLAGS = -Iinclude -ldl -lglfw -pthread -lm
 
 # Colors Definition
 BLUE = "\033[34;1m"
@@ -26,19 +28,34 @@ COLOR_LIMITER = "\033[0m"
 # Paths for libraries
 BIN_PATH = ./bin/
 MANDATORY_SOURCES_PATH = ./src/
-LIBS_PATH = ./libs/
-INCLUDES_PATH = -I ./include -I $(LIBMLX)/include
-MLX_PATH = $(LIBS_PATH)MLX42/build/libmlx42.a -ldl -lglfw -lm
+LIBS_PATH = ./libs
+
+MLX_PATH = $(LIBS_PATH)/MLX42
+MLX = $(MLX_PATH)/build/libmlx42.a
+
+LIBFT_PATH = $(LIBS_PATH)/libft
+LIBFT = $(LIBFT_PATH)/libft.a
+
+INCLUDES_PATH = -I ./include -I $(MLX_PATH)/include/MLX42 -I $(LIBFT_PATH)
 
 MANDATORY_SOURCES = \
 	test.c
 
 OBJECTS = $(addprefix $(BIN_PATH), $(MANDATORY_SOURCES:%.c=%.o))
 
-all: $(BIN_PATH) $(NAME) $(MLX_PATH)
+all: libft $(BIN_PATH) $(NAME)
+
+libft:
+ifeq ($(wildcard $(LIBFT)),)
+	@make -C $(LIBFT_PATH) --no-print-directory
+	@echo $(CYAN)" --------------------------------------"$(COLOR_LIMITER)
+	@echo $(CYAN)"|  LIBFT  Was Compiled Successfully!! |"$(COLOR_LIMITER)
+	@echo $(CYAN)"--------------------------------------"$(COLOR_LIMITER)
+	@echo " "
+endif
 
 $(BIN_PATH)%.o: $(MANDATORY_SOURCES_PATH)%.c
-	@echo $(BLUE)[Compiling philosophers]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@echo $(BLUE)[Compiling cub3D]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES_PATH)
 	@echo " "
 
@@ -46,7 +63,7 @@ $(NAME): $(OBJECTS)
 	@echo $(CYAN)" --------------------------------------------------"$(COLOR_LIMITER)
 	@echo $(CYAN)"| cub3D executable was created successfully!! |"$(COLOR_LIMITER)
 	@echo $(CYAN)"--------------------------------------------------"$(COLOR_LIMITER)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(MLX_PATH) $(INCLUDES_PATH)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES_PATH) $(MLX) -L $(LIBFT) -lft
 	@echo " "
 
 $(BIN_PATH):
@@ -54,6 +71,7 @@ $(BIN_PATH):
 
 clean:
 	@echo $(RED)[Removing Objects]$(COLOR_LIMITER)
+	@make fclean -C $(LIBFT_PATH) --no-print-directory
 	@rm -rf $(BIN_PATH)
 
 fclean: clean
