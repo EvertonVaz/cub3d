@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 17:40:15 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/24 18:11:15 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,38 +30,21 @@ t_map	*get_map_address(t_map *map)
 	return (map_address);
 }
 
-int	check_color(char *color)
+char	**handle_map(char *line)
 {
-	int	n;
-	if (!color)
-		return (-1);
-	n = ft_atoi(color);
-	return (n >= 0 && n <= 255);
-}
+	char	**map;
+	char	*trim;
 
-int32_t	get_colors(char *line)
-{
-	char	**colors;
-	int32_t	color;
-	int		check;
-
-	color = 0;
-	colors = ft_split(line, ' ');
-	if (check_color(colors[1]) && check_color(colors[2]) && check_color(colors[3]))
+	trim = ft_strtrim(line, " ");
+	if (trim && (trim[0] == '1' || trim[0] == '0'))
 	{
-		color = ft_pixel(ft_atoi(colors[1]), ft_atoi(colors[2]), ft_atoi(colors[3]), 255);
-		free_split(colors);
-		return (color);
-	}
-	free_split(colors);
-	return (-1);
-}
+		// ENCONTRAMOS O MAPA
+		// LER O ARQUIVO ATE O FIM E COLOCAR O MAPA EM UMA MATRIZ
+		map = malloc(sizeof(char *) * 64);
 
-int	validate_infos(t_map *map)
-{
-	if (map->ceiling_color < 0 || map->floor_color < 0)
-		return (0);
-	return (1);
+		free(trim);
+		return (map);
+	}
 }
 
 t_map	*fill_map_infos(int fd)
