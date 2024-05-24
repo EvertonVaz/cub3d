@@ -1,4 +1,4 @@
-NAME		:= cub3d
+NAME		:= cub3D
 CC			:= gcc
 CFLAGS		:= -Wextra -Wall -Werror -g3
 
@@ -22,14 +22,19 @@ SRCS			:= $(addprefix ./src/, test.c)
 OBJS			:= $(patsubst ./src/%.c,$(BIN_PATH)%.o,$(SRCS))
 
 
-all: $(LIBFT_PATH)$(LIBFT) $(LIBMLX_PATH)/build/libmlx42.a $(BIN_PATH) $(NAME)
+all: libft $(LIBMLX_PATH)/build/libmlx42.a $(BIN_PATH) $(NAME)
 
-$(LIBFT_PATH)$(LIBFT):
-	@make -sC ./libft
+libft:
+ifeq ($(wildcard $(LIBFT)),)
+	@make -C $(LIBFT_PATH) --no-print-directory
+endif
 
 $(LIBMLX_PATH)/build/libmlx42.a:
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4 && printf "\n"
-	
+	@echo $(CYAN)" --------------------------------------------------"$(COLOR_LIMITER)
+	@echo $(CYAN)"|   MLX42 executable was created successfully!!   |"$(COLOR_LIMITER)
+	@echo $(CYAN)"--------------------------------------------------"$(COLOR_LIMITER)
+
 $(BIN_PATH)%.o: ./src/%.c
 	@echo $(BLUE)[Compiling cub3D]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "\n"
@@ -52,7 +57,6 @@ clean:
 fclean: clean
 	@echo $(RED)[Removing $(NAME) executable]$(COLOR_LIMITER)
 	@rm -rf ./libft/libft.a
-	@rm -rf $(LIBMLX_PATH)/build
 	@rm -rf $(NAME)
 
 

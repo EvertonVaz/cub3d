@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/22 15:13:20 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/24 09:58:27 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../libs/MLX42/include/MLX42/MLX42.h"
+#include "../libs/libft/libft.h"
 
 
 

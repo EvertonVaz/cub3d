@@ -3,10 +3,8 @@
 // See README in the root project for more information.
 // -----------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-# include "../libs/MLX42/include/MLX42/MLX42.h"
+# include "../includes/cub3D.h"
+
 
 #define WIDTH 512
 #define HEIGHT 512
@@ -59,7 +57,7 @@ void ft_hook(void* param)
 int32_t main(void)
 {
 	mlx_t* mlx;
-
+	printf("%d", ft_atoi("+10"));
 	// Gotta error check this stuff
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
@@ -78,7 +76,7 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	
+
 	mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 
