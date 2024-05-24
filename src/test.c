@@ -3,35 +3,103 @@
 // See README in the root project for more information.
 // -----------------------------------------------------------------------------
 
-# include "../includes/cub3D.h"
+#include "../includes/cub3D.h"
 
 
-#define WIDTH 512
-#define HEIGHT 512
+#define mapWidth 24
+#define mapHeight 24
+#define screenWidth 1000
+#define screenHeight 1000
 
 static mlx_image_t* image;
 
-// -----------------------------------------------------------------------------
+int worldMap[mapWidth][mapHeight]=\
+{
+  {1,1,1,1,1,1,1,1,1,1,1,1 ,1,1,1,1,1,1,1,1,1,1,1,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,2,2,2,2,2,0 ,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,2,0,0,0,2,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,2,0,0,0,2,0 ,0,0,0,3,0,0,0,3,0,0,0,1},
+  {1,0,0,0,0,0,2,0,0,0,2,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,2,2,0,2,2,0 ,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,4,4,4,4,4,4,4,0,0,0 ,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,0,4,0,0,0,0,4,0,0,0 ,0,0,0,0,0,0,0,1,0,0,0,1},
+  {1,4,0,0,0,0,5,0,4,0,0,0 ,0,0,0,0,0,0,1,1,1,0,0,1},
+  {1,4,0,4,0,0,0,0,4,0,0,0 ,0,1,1,1,0,1,1,1,1,1,0,1},
+  {1,4,0,4,4,4,4,4,4,0,0,0 ,0,1,-1,1,0,0,0,0,0,0,0,1},
+  {1,4,0,0,0,0,0,0,0,0,0,0 ,0,1,-1,1,0,0,0,0,0,0,0,1},
+  {1,4,4,4,4,4,4,4,4,0,0,0 ,0,1,-1,1,0,0,0,0,0,0,0,1},
+  {1,1,1,1,1,1,1,1,1,1,1,1 ,1,1,-1,1,1,1,1,1,1,1,1,1}
+};
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
+void	draw_square(int Xmap, int Ymap, int32_t color)
+{
+	int	x;
+	int	y;
+	int	square_width;
+    int	square_height;
+ 	square_width = screenWidth / mapWidth;
+	square_height = screenHeight / mapHeight;
+	x = Xmap * square_width - 1;
+	while (++x < square_width * (Xmap+1))
+	{
+		y = Ymap * square_height -1;
+		while (++y < square_height * (Ymap+1))
+			mlx_put_pixel(image, x, y, color);
+	}
+}
+
+void	draw_map(void *param)
+{
+	int		Xmap_posicion;
+	int		Ymap_posicion;
+	int32_t	color;
+
+	(void)param;
+	Xmap_posicion = -1;
+	while (++Xmap_posicion < mapWidth)
+	{
+		Ymap_posicion = -1;
+		while (++Ymap_posicion < mapHeight)
+		{
+			color = ft_pixel(0, 0, 0, 255);
+			if (worldMap[Xmap_posicion][Ymap_posicion] > 0)
+				color = ft_pixel(255, 255, 255, 255);
+			if (worldMap[Xmap_posicion][Ymap_posicion] >= 0)
+				draw_square(Ymap_posicion, Xmap_posicion, color);
+		}
+	}
+
+}
+
 void ft_randomize(void* param)
 {
 	(void)param;
-	for (uint32_t i = 0; i < image->width; ++i)
+	for (uint32_t x = 0; x < image->width; ++x)
 	{
 		for (uint32_t y = 0; y < image->height; ++y)
 		{
 			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
-				rand() % 0xFF, // G
-				rand() % 0xFF, // B
-				rand() % 0xFF  // A
+				255, // R
+				255, // G
+				255, // B
+				255  // A
 			);
-			mlx_put_pixel(image, i, y, color);
+			mlx_put_pixel(image, x, y, color);
 		}
 	}
 }
@@ -42,13 +110,13 @@ void ft_hook(void* param)
 
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		image->instances[0].x += 5;
 }
 
@@ -57,31 +125,16 @@ void ft_hook(void* param)
 int32_t main(void)
 {
 	mlx_t* mlx;
-	printf("%d", ft_atoi("+10"));
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	{
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
 
-	mlx_loop_hook(mlx, ft_randomize, mlx);
+	// Gotta error check this stuff
+	mlx = mlx_init(screenWidth, screenHeight, "MLX42", true);
+	image = mlx_new_image(mlx, screenWidth, screenHeight);
+	mlx_image_to_window(mlx, image, 0, 0);
+
+	mlx_loop_hook(mlx, draw_map, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 18:56:09 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/24 15:07:01 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ char				*ft_strcpy_delim(const char *src, char delim);
 char				*ft_strjoin_char(char *str, char c);
 char				*ft_remove_quotes(char *str);
 char				*char_to_str(char c);
+void				free_split(char **split);
 
 #endif

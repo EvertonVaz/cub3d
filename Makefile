@@ -16,9 +16,14 @@ LIBFT_PATH		:= ./libs/libft/
 BIN_PATH		:= ./bin/
 LIBFT			:= libft.a
 
+FILES			:= \
+	main.c check_args.c \
+	maps/handle_map.c maps/handle_texture.c
+
+
 HEADERS			:= -I ./cub3d.h -I $(LIBMLX_PATH)/include -I ./libft
 LIBS			:= $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT_PATH)$(LIBFT)
-SRCS			:= $(addprefix ./src/, test.c)
+SRCS			:= $(addprefix ./src/, $(FILES))
 OBJS			:= $(patsubst ./src/%.c,$(BIN_PATH)%.o,$(SRCS))
 
 
@@ -48,6 +53,7 @@ $(NAME): $(OBJS)
 
 $(BIN_PATH):
 	@mkdir -p $(BIN_PATH)
+	@mkdir -p $(BIN_PATH)maps
 
 clean:
 	@echo $(RED)[Removing Objects]$(COLOR_LIMITER)

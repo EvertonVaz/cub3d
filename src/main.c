@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 11:50:19 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 12:18:28 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/05/24 16:13:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/cub3D.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+int	handle_error(char *msg, int num)
 {
-	size_t	len_substr;
+	if (num < 0)
+		exit(write(2, msg, ft_strlen(msg)));
+	return (num);
+}
 
-	len_substr = ft_strlen(little);
-	if (*little == '\0')
-		return ((char *)big);
-	while (big && *big && len_substr <= len--)
-	{
-		if (ft_strncmp(big, little, len_substr) == 0)
-			return ((char *)big);
-		big++;
-	}
-	return (NULL);
+int	main(int argc, char **argv)
+{
+	int	fd;
+
+	fd = check_args_return_fd(argc, argv);
+	handle_error("Error: Invalid arguments\n", fd);
+	get_map(fd);
+	printf("%d\n", check_args_return_fd(argc, argv));
+
+	return (0);
 }

@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 11:50:19 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 12:18:28 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/05/24 16:13:34 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/cub3D.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
-	size_t	len_substr;
-
-	len_substr = ft_strlen(little);
-	if (*little == '\0')
-		return ((char *)big);
-	while (big && *big && len_substr <= len--)
-	{
-		if (ft_strncmp(big, little, len_substr) == 0)
-			return ((char *)big);
-		big++;
-	}
-	return (NULL);
+    return (r << 24 | g << 16 | b << 8 | a);
 }

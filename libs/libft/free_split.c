@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 11:50:19 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 12:18:28 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/05/24 15:06:12 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/05/24 15:06:46 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+void	free_split(char **split)
 {
-	size_t	len_substr;
+	int	i;
 
-	len_substr = ft_strlen(little);
-	if (*little == '\0')
-		return ((char *)big);
-	while (big && *big && len_substr <= len--)
+	i = 0;
+	while (split[i])
 	{
-		if (ft_strncmp(big, little, len_substr) == 0)
-			return ((char *)big);
-		big++;
+		free(split[i]);
+		i++;
 	}
-	return (NULL);
+	free(split);
+	split = NULL;
 }

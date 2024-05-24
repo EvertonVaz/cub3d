@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 11:50:19 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 12:18:28 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/05/24 17:34:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+#include <stdint.h>
+
+typedef struct s_player
 {
-	size_t	len_substr;
+	double	x;
+}			t_player;
 
-	len_substr = ft_strlen(little);
-	if (*little == '\0')
-		return ((char *)big);
-	while (big && *big && len_substr <= len--)
-	{
-		if (ft_strncmp(big, little, len_substr) == 0)
-			return ((char *)big);
-		big++;
-	}
-	return (NULL);
-}
+typedef struct s_map
+{
+	char	**map;
+	int		map_width;
+	int		map_height;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	int32_t	floor_color;
+	int32_t	ceiling_color;
+}			t_map;
+
+#endif
