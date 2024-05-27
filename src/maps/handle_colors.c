@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/27 13:10:24 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:23:20 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int32_t	get_colors(char *line)
 	while (line && *line)
 	{
 		if (ft_isdigit(*line))
-			break;
+			break ;
 		line++;
 	}
 	colors = ft_split(line, ',');
@@ -35,11 +35,13 @@ int32_t	get_colors(char *line)
 	while (colors[++i])
 	{
 		if (ft_atoi(colors[i]) < 0 || ft_atoi(colors[i]) > 255)
+		{
+			free_split(colors);
 			return (color);
+		}
 	}
 	color = ft_pixel(ft_atoi(colors[1]), ft_atoi(colors[2]), ft_atoi(colors[3]),
 			255);
-	free(colors);
+	free_split(colors);
 	return (color);
 }
-

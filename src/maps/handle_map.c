@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/27 13:14:55 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:11:54 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ char	**handle_map(char *line, int fd)
 		while (1)
 		{
 			line[ft_strlen(line) - 1] = '\0';
-			map[i] = line;
-			if (!map[i])
-				break;
+			map[i] = ft_strdup(line);
 			i++;
+			free(line);
 			line = get_next_line(fd);
+			map[i] = NULL;
+			if (!line)
+				break ;
 		}
 		free(trim);
 		return (map);
@@ -81,20 +83,19 @@ t_map	*fill_map_infos(int fd)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (!line)
-			break;
-		if (fill_texture(&map, line));
+		if (fill_texture(&map, line))
+			;
 		else if (ft_strchr(line, 'C'))
 			map->ceiling_color = get_colors(line);
 		else if (ft_strchr(line, 'F'))
 			map->floor_color = get_colors(line);
 		else
-		 	map->map = handle_map(line, fd);
+			map->map = handle_map(line, fd);
+		if (map->map)
+			return (map);
 		free(line);
 	}
-	if (!map->map)
-		return (NULL);
-	return (map);
+	return (NULL);
 }
 
 /*
