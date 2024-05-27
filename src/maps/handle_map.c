@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 18:11:15 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:14:55 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,57 @@
 	as coordenadas das texturas devem ser válidas
 	validar se existe um player no mapa
 	verificar se o mapa esta completamente fechado por paredes
- */
+*/
+
+t_map	*init_data(void)
+{
+	t_map	*map;
+
+	map = malloc(sizeof(t_map));
+	map->we_texture = NULL;
+	map->so_texture = NULL;
+	map->no_texture = NULL;
+	map->ea_texture = NULL;
+	map->map = NULL;
+	map->ceiling_color = -1;
+	map->floor_color = -1;
+	return (map);
+}
 
 t_map	*get_map_address(t_map *map)
 {
-	t_map	*map_address;
+	static t_map	*map_address;
 
 	if (!map_address)
 		map_address = map;
 	return (map_address);
 }
 
-char	**handle_map(char *line)
+char	**handle_map(char *line, int fd)
 {
 	char	**map;
 	char	*trim;
+	int		i;
 
 	trim = ft_strtrim(line, " ");
 	if (trim && (trim[0] == '1' || trim[0] == '0'))
 	{
-		// ENCONTRAMOS O MAPA
-		// LER O ARQUIVO ATE O FIM E COLOCAR O MAPA EM UMA MATRIZ
 		map = malloc(sizeof(char *) * 64);
-
+		i = 0;
+		while (1)
+		{
+			line[ft_strlen(line) - 1] = '\0';
+			map[i] = line;
+			if (!map[i])
+				break;
+			i++;
+			line = get_next_line(fd);
+		}
 		free(trim);
 		return (map);
 	}
+	free(trim);
+	return (NULL);
 }
 
 t_map	*fill_map_infos(int fd)
@@ -52,18 +77,19 @@ t_map	*fill_map_infos(int fd)
 	t_map	*map;
 	char	*line;
 
+	map = init_data();
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		fill_texture(&map, line);
-		if (ft_strchr(line, 'C'))
+		if (fill_texture(&map, line));
+		else if (ft_strchr(line, 'C'))
 			map->ceiling_color = get_colors(line);
 		else if (ft_strchr(line, 'F'))
 			map->floor_color = get_colors(line);
-		// else
-		// 	get_map(line);
+		else
+		 	map->map = handle_map(line, fd);
 		free(line);
 	}
 	if (!map->map)

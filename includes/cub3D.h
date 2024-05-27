@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 18:01:26 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:52:36 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdlib.h>
 
 int		check_args_return_fd(int argc, char **argv);
-char	**get_map(char *line);
+t_map	*fill_map_infos(int fd);
 int32_t	get_colors(char *line);
-void	fill_texture(t_map **map, char *line);
+int		fill_texture(t_map **map, char *line);
 int		validate_texture_path(t_map map);
 
 #endif

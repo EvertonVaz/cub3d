@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 16:13:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:17:45 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 
 	fd = check_args_return_fd(argc, argv);
 	handle_error("Error: Invalid arguments\n", fd);
-	get_map(fd);
+	fill_map_infos(fd);
 	printf("%d\n", check_args_return_fd(argc, argv));
 
 	return (0);
