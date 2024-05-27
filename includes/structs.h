@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 17:34:55 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:08:00 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@ typedef struct s_map
 	int32_t	floor_color;
 	int32_t	ceiling_color;
 }			t_map;
+
+typedef struct s_texture_map {
+    char *identifier;
+    char **texture;
+} t_texture_map;
 
 #endif
