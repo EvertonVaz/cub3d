@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/28 08:44:28 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:30:48 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-int		check_args_return_fd(int argc, char **argv);
+char	*check_args_return_path_map(int argc, char **argv);
+t_map	*get_map_address(t_map *map);
 t_map	*fill_map_infos(int fd);
-int32_t	get_colors(char *line);
+int32_t	get_colors(t_map **map, char *line, char identifier);
 char	*handle_texture(t_map **map, char *line);
-int		validate_texture_path(t_map map);
+int		fill_texture(t_map **map, char *side, char *texture);
+char	*check_duplicates(t_map *map);
+void	free_maps(t_map **map);
+int		handle_error(char *msg, int num);
 
 #endif

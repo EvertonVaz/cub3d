@@ -3,41 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/27 18:41:02 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:30:21 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	handle_error(char *msg, int num)
+t_map	*init_data(void)
 {
-	if (num < 0)
-		exit(write(2, msg, ft_strlen(msg)));
-	return (num);
-}
+	t_map	*map;
 
-void	free_maps(t_map **map)
-{
-	free((*map)->ea_texture);
-	free((*map)->we_texture);
-	free((*map)->no_texture);
-	free((*map)->so_texture);
-	free_split((*map)->map);
-	free(*map);
+	map = malloc(sizeof(t_map));
+	map->we_texture = NULL;
+	map->so_texture = NULL;
+	map->no_texture = NULL;
+	map->ea_texture = NULL;
+	map->map = NULL;
+	map->ceiling_color = -1;
+	map->floor_color = -1;
+	map->check_we = 0;
+	map->check_so = 0;
+	map->check_no = 0;
+	map->check_ea = 0;
+	map->floor_check = 0;
+	map->ceiling_check = 0;
+	return (get_map_address(map));
 }
 
 int	main(int argc, char **argv)
 {
-	int		fd;
 	t_map	*map;
+	int		fd;
 
-	fd = check_args_return_fd(argc, argv);
+	map = init_data();
+	map->path_map = check_args_return_path_map(argc, argv);
+	fd = open(map->path_map, O_RDONLY);
 	handle_error("Error: Invalid arguments\n", fd);
 	map = fill_map_infos(fd);
+	if (check_duplicates(map))
+		handle_error(check_duplicates(map), -1);
 	free_maps(&map);
-	printf("%d\n", check_args_return_fd(argc, argv));
+	printf("%s\n", check_args_return_path_map(argc, argv));
 	return (0);
 }

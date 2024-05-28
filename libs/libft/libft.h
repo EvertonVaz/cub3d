@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/24 15:07:01 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:49:15 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 int					ft_isnum(char *str);
 char				*get_next_line(int fd);
-int					is_space(char c);
+int					ft_is_space(char c);
 char				*ft_strcpy_delim(const char *src, char delim);
 char				*ft_strjoin_char(char *str, char c);
 char				*ft_remove_quotes(char *str);

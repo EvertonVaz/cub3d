@@ -18,7 +18,7 @@ LIBFT			:= libft.a
 
 FILES			:= \
 	main.c check_args.c \
-	maps/handle_map.c maps/handle_texture.c maps/handle_colors.c
+	maps/handle_map.c maps/handle_texture.c maps/handle_colors.c maps/check_duplicates.c
 
 
 HEADERS			:= -I ./cub3d.h -I $(LIBMLX_PATH)/include -I ./libft

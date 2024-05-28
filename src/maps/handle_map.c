@@ -6,35 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/28 09:04:42 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:18:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-/*
-	os argumentos podem estar em qualquer ordem e podem ter espaços
-	checar as cores, de 0 a 255
-	se certificar que o mapa e a ultima instrução do arquivo
-	as coordenadas das texturas devem ser válidas
-	validar se existe um player no mapa
-	verificar se o mapa esta completamente fechado por paredes
-*/
-
-t_map	*init_data(void)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	map->we_texture = NULL;
-	map->so_texture = NULL;
-	map->no_texture = NULL;
-	map->ea_texture = NULL;
-	map->map = NULL;
-	map->ceiling_color = -1;
-	map->floor_color = -1;
-	return (map);
-}
 
 t_map	*get_map_address(t_map *map)
 {
@@ -52,6 +28,7 @@ char	**handle_map(char *line, int fd)
 	int		i;
 
 	trim = ft_strtrim(line, " ");
+	map = NULL;
 	if (trim && (trim[0] == '1' || trim[0] == '0'))
 	{
 		map = malloc(sizeof(char *) * 64);
@@ -67,11 +44,9 @@ char	**handle_map(char *line, int fd)
 			if (!line)
 				break ;
 		}
-		free(trim);
-		return (map);
 	}
 	free(trim);
-	return (NULL);
+	return (map);
 }
 
 t_map	*fill_map_infos(int fd)
@@ -79,16 +54,16 @@ t_map	*fill_map_infos(int fd)
 	t_map	*map;
 	char	*line;
 
-	map = init_data();
+	map = get_map_address(NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (handle_texture(&map, line))
 			;
 		else if (ft_strchr(line, 'C'))
-			map->ceiling_color = get_colors(line);
+			map->ceiling_color = get_colors(&map, line, 'C');
 		else if (ft_strchr(line, 'F'))
-			map->floor_color = get_colors(line);
+			map->floor_color = get_colors(&map, line, 'F');
 		else
 			map->map = handle_map(line, fd);
 		if (map->map)
@@ -97,38 +72,3 @@ t_map	*fill_map_infos(int fd)
 	}
 	return (NULL);
 }
-
-/*
-O mapa deve ser composto de apenas 6 caracteres possíveis:
-0 para um espaço vazio,
-1 para uma parede,
-e N, S, E ou W para a posição inicial do jogador
-e orientação de spawn.
-*/
-
-/*
-O mapa deve estar fechado/rodeado por paredes,
-	se não o programa deve retornar um erro.
-
-Exceto pelo conteúdo do mapa,
-	cada tipo de elemento pode ser separado por uma ou mais linha(s)
-	vazia(s).
-
-Exceto pelo conteúdo do mapa que sempre deve ser o último,
-	cada tipo de elemento pode ser definido em qualquer ordem
-	no arquivo.
-
-Exceto pelo mapa,
-	cada tipo de informação de um elemento pode ser separado
-	por um ou mais espaço(s).
-
-O mapa deve ser analisado como está no arquivo.
-Espaços são uma parte válida do mapa e cabe a você lidar com isso.
-Você deve ser capaz de analisar qualquer tipo de mapa,
-desde que respeite as regras do mapa.
-
-Cada elemento (exceto o mapa) tem como primeira informação
-o identificador do tipo (composto por um ou dois caracteres),
-seguido por todas as informações específicas para cada objeto
-em uma ordem estrita, 	como:
- */
