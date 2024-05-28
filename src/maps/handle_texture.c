@@ -3,41 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   handle_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/27 20:58:23 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/28 09:02:20 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-char	*check_side(char *splited_line, char *side)
+char	*check_side(char *identifier, char *side)
 {
-	return (ft_strnstr(splited_line, side, ft_strlen(splited_line)));
+	return (ft_strnstr(identifier, side, ft_strlen(identifier)));
 }
 
-// nao pode haver argumentos duplicados no arquivo do mapa
-// void	check_duplicated(t_map map, char *splited_line, char *side)
-// {
-	// if (check_side(splited_line, side) && map.)
-// }
-
-char	*fill_texture(t_map **map, char *line)
+void	fill_texture(t_map **map, char *side, char *texture)
 {
-	char	**splited_line;
+	int					i;
+	const t_texture_map	texture_map[5] = {
+	{"WE", &(*map)->we_texture},
+	{"SO", &(*map)->so_texture},
+	{"NO", &(*map)->no_texture},
+	{"EA", &(*map)->ea_texture},
+	{NULL, NULL}
+	};
+
+	i = 0;
+	while (texture_map[i].identifier)
+	{
+		if (check_side(texture_map[i].identifier, side))
+		{
+			*texture_map[i].texture = texture;
+			break ;
+		}
+		i++;
+	}
+}
+
+char	*handle_texture(t_map **map, char *line)
+{
+	char			**splited_line;
 
 	splited_line = ft_split(line, ' ');
 	if (splited_line && splited_line[0] && splited_line[1])
+	{
 		splited_line[1][ft_strlen(splited_line[1]) - 1] = '\0';
-	else if (check_side(splited_line[0], "WE") && !(*map)->we_texture)
-		(*map)->we_texture = ft_strdup(splited_line[1]);
-	else if (check_side(splited_line[0], "SO") && !(*map)->so_texture)
-		(*map)->so_texture = ft_strdup(splited_line[1]);
-	else if (check_side(splited_line[0], "NO") && !(*map)->no_texture)
-		(*map)->no_texture = ft_strdup(splited_line[1]);
-	else if (check_side(splited_line[0], "EA") && !(*map)->ea_texture)
-		(*map)->ea_texture = ft_strdup(splited_line[1]);
+		fill_texture(map, splited_line[0], ft_strdup(splited_line[1]));
+	}
 	free_split(splited_line);
 	return (0);
 }
