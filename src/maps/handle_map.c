@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 14:26:02 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 14:42:24 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ char	**handle_map(char *line, int fd)
 	return (map);
 }
 
-int	check_map_infos(char *line, t_map *map)
+void	check_map_infos(char *line, t_map *map)
 {
 	char	**splited_line;
 	char	*trim;
 
+	if (!line)
+		return ;
 	splited_line = ft_split(line, ' ');
 	trim = ft_strtrim(splited_line[0], " WAESONCF\n");
 	if (trim && *trim)
 		map->checker->check_infos = 1;
 	free(trim);
 	free_split(splited_line);
-	return(map->checker->check_infos);
 }
 
 t_map	*fill_map_infos(int fd)
@@ -72,7 +73,7 @@ t_map	*fill_map_infos(int fd)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (map->map || !line)
+		if (!line)
 			return (map);
 		handle_texture(&map, line);
 		if (ft_strchr(line, 'C'))
@@ -81,6 +82,8 @@ t_map	*fill_map_infos(int fd)
 			map->floor_color = get_colors(&map, line, 'F');
 		else
 			map->map = handle_map(line, fd);
+		if (map->map)
+			return (map);
 		check_map_infos(line, map);
 		free(line);
 	}
