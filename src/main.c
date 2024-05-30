@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:52:00 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:50:14 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int argc, char **argv)
 	t_map	*map;
 	int		fd;
 
-	map = init_data();
-	map->path_map = check_args_return_path_map(argc, argv);
+	map = NULL;
+	check_args_return_path_map(argc, argv, &map);
 	fd = open(map->path_map, O_RDONLY);
 	handle_error(NULL, fd);
 	map = fill_map_infos(fd);

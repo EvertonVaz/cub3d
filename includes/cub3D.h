@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:58:03 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:51:09 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-char	*check_args_return_path_map(int argc, char **argv);
+void	check_args_return_path_map(int argc, char **argv, t_map **map);
 t_map	*get_map_address(t_map *map);
 t_map	*fill_map_infos(int fd);
 int32_t	get_colors(t_map **map, char *line, char identifier);
@@ -32,5 +32,6 @@ int		fill_texture(t_map **map, char *side, char *texture);
 char	*check_duplicates(t_map *map);
 void	free_maps(t_map **map);
 int		handle_error(char *msg, int num);
+t_map	*init_data(void);
 
 #endif
