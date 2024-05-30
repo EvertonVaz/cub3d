@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/28 15:30:35 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:14:59 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_maps(t_map **map)
 {
+	if (map && (*map)->path_map)
+		free((*map)->path_map);
 	if (map && (*map)->ea_texture)
 		free((*map)->ea_texture);
 	if (map && (*map)->we_texture)
@@ -33,10 +35,20 @@ int	handle_error(char *msg, int num)
 	t_map	*map;
 
 	map = get_map_address(NULL);
-	if (num < 0)
+	if (num == -1)
 	{
 		free_maps(&map);
-		exit(write(2, msg, ft_strlen(msg)));
+		msg = ft_strjoin("Error\n", strerror(errno), 0);
+		write(2, msg, ft_strlen(msg));
+		write(2, "\n", 1);
+		free(msg);
+		exit(1);
+	}
+	if (msg)
+	{
+		free_maps(&map);
+		write(2, msg, ft_strlen(msg));
+		exit(1);
 	}
 	return (num);
 }

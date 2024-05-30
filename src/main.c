@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/28 15:30:21 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:12:31 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int	main(int argc, char **argv)
 	map = init_data();
 	map->path_map = check_args_return_path_map(argc, argv);
 	fd = open(map->path_map, O_RDONLY);
-	handle_error("Error: Invalid arguments\n", fd);
+	handle_error(NULL, fd);
 	map = fill_map_infos(fd);
-	if (check_duplicates(map))
-		handle_error(check_duplicates(map), -1);
+	handle_error(check_duplicates(map), 0);
 	free_maps(&map);
 	printf("%s\n", check_args_return_path_map(argc, argv));
 	return (0);
