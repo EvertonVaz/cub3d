@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_colors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/28 15:06:06 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:28:44 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int32_t	get_colors(t_map **map, char *line, char identifier)
 			255);
 	free_split(colors);
 	if (identifier == 'F')
-		(*map)->floor_check++;
+		(*map)->checker->check_floor++;
 	else if (identifier == 'C')
-		(*map)->ceiling_check++;
+		(*map)->checker->check_ceiling++;
 	return (color);
 }

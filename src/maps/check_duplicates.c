@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:56:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:03:41 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 11:53:39 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 char	*check_duplicates(t_map *map)
 {
-	if (map->check_ea != 1)
+	if (map->checker->check_ea != 1)
 		return ("Error\nCheck East texture\n");
-	if (map->check_no != 1)
+	if (map->checker->check_no != 1)
 		return ("Error\nCheck North texture\n");
-	if (map->check_so != 1)
+	if (map->checker->check_so != 1)
 		return ("Error\nCheck South texture\n");
-	if (map->check_we != 1)
+	if (map->checker->check_we != 1)
 		return ("Error\nCheck West texture\n");
-	if (map->floor_check != 1)
+	if (map->checker->check_floor != 1)
 		return ("Error\nCheck Floor color\n");
-	if (map->ceiling_check != 1)
+	if (map->checker->check_ceiling != 1)
 		return ("Error\nCheck Ceiling color\n");
+	if (map->checker->check_infos)
+		return ("Error\nCheck Map infos\n");
 	return (NULL);
 }

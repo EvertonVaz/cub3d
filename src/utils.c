@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:14:59 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 11:53:10 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_maps(t_map **map)
 		free((*map)->so_texture);
 	if (map && (*map)->map)
 		free_split((*map)->map);
+	if (map && (*map)->checker)
+		free((*map)->checker);
 	if (map && *map)
 		free(*map);
 }

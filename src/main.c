@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:12:31 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 11:52:00 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ t_map	*init_data(void)
 	map->map = NULL;
 	map->ceiling_color = -1;
 	map->floor_color = -1;
-	map->check_we = 0;
-	map->check_so = 0;
-	map->check_no = 0;
-	map->check_ea = 0;
-	map->floor_check = 0;
-	map->ceiling_check = 0;
+	map->checker = malloc(sizeof(t_checker));
+	map->checker->check_we = 0;
+	map->checker->check_so = 0;
+	map->checker->check_no = 0;
+	map->checker->check_ea = 0;
+	map->checker->check_ceiling = 0;
+	map->checker->check_floor = 0;
+	map->checker->check_infos = 0;
 	return (get_map_address(map));
 }
 
@@ -44,7 +46,7 @@ int	main(int argc, char **argv)
 	handle_error(NULL, fd);
 	map = fill_map_infos(fd);
 	handle_error(check_duplicates(map), 0);
+	printf("%s\n", map->path_map);
 	free_maps(&map);
-	printf("%s\n", check_args_return_path_map(argc, argv));
 	return (0);
 }
