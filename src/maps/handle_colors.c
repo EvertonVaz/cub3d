@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_colors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:28:44 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:57:28 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int32_t	get_colors(t_map **map, char *line, char identifier)
 	char	**colors;
 	int32_t	color;
 
+	if (line[1])
+		line++;
 	i = pass_spaces(line);
 	colors = ft_split(&line[i], ',');
 	i = -1;
@@ -49,7 +51,8 @@ int32_t	get_colors(t_map **map, char *line, char identifier)
 			return (color);
 		}
 	}
-	color = ft_pixel(ft_atoi(colors[1]), ft_atoi(colors[2]), ft_atoi(colors[3]),
+	if (i == 3)
+		color = ft_pixel(ft_atoi(colors[1]), ft_atoi(colors[2]), ft_atoi(colors[3]),
 			255);
 	free_split(colors);
 	if (identifier == 'F')
@@ -57,4 +60,10 @@ int32_t	get_colors(t_map **map, char *line, char identifier)
 	else if (identifier == 'C')
 		(*map)->checker->check_ceiling++;
 	return (color);
+}
+
+void check_colors(t_map **map)
+{
+	if ((*map)->floor_color == -1 || (*map)->ceiling_color == -1)
+		handle_error("Error\nInvalid or unset color, please provide 3 numbers between 0 to 255\n", 0);
 }

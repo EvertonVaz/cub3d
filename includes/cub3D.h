@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 15:51:09 by natali           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:30:50 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	*check_duplicates(t_map *map);
 void	free_maps(t_map **map);
 int		handle_error(char *msg, int num);
 t_map	*init_data(void);
+void     check_colors(t_map **map);
 
 #endif
