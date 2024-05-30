@@ -62,7 +62,7 @@ clean:
 
 fclean: clean
 	@echo $(RED)[Removing $(NAME) executable]$(COLOR_LIMITER)
-	@rm -rf ./libft/libft.a
+	@rm -rf ./libs/libft/libft.a
 	@rm -rf $(NAME)
 
 
