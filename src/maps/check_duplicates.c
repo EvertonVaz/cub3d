@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:56:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 14:11:44 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:04:50 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*check_duplicates(t_map *map)
 	if (map->checker->check_ceiling != 1)
 		return ("Error\nCheck Ceiling color\n");
 	if (map->checker->check_infos)
-		return ("Error\nCheck Map infos\n");
+		return ("Error\nInvalid map\n");
 	return (NULL);
 }
 
