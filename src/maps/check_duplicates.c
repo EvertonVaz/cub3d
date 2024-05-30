@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:56:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:53:39 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 14:11:44 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,4 @@ char	*check_duplicates(t_map *map)
 		return ("Error\nCheck Map infos\n");
 	return (NULL);
 }
+
