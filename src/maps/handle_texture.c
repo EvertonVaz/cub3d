@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 12:42:34 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/05/30 18:58:59 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ int	handle_texture(t_map **map, char *line)
 	char	**splited_line;
 	char	*texture;
 	int		is_texture;
-
-	splited_line = ft_split(line, ' ');
+	char	*trim_line;
+	
+	trim_line = ft_strtrim(line, "\n");
+	splited_line = ft_split(trim_line, ' ');
+	free(trim_line);
 	is_texture = 1;
 	if (splited_line && splited_line[0] && splited_line[1])
 	{
