@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_duplicates.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:56:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 15:04:50 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/02 11:48:35 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ char	*check_duplicates(t_map *map)
 		return ("Error\nInvalid map\n");
 	return (NULL);
 }
-

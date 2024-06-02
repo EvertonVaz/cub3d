@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 18:58:59 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/02 11:49:24 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ char	*check_side(char *identifier, char *side)
 int	fill_texture(t_map **map, char *side, char *texture)
 {
 	int					i;
-	const t_texture_map	texture_map[5] = {
-	{"WE", &(*map)->we_texture, &(*map)->checker->check_we},
-	{"SO", &(*map)->so_texture, &(*map)->checker->check_so},
-	{"NO", &(*map)->no_texture, &(*map)->checker->check_no},
-	{"EA", &(*map)->ea_texture, &(*map)->checker->check_ea},
-	{NULL, NULL, NULL}
-	};
+	const t_texture_map	texture_map[5] = {{"WE", &(*map)->we_texture,
+		&(*map)->checker->check_we}, {"SO", &(*map)->so_texture,
+		&(*map)->checker->check_so}, {"NO", &(*map)->no_texture,
+		&(*map)->checker->check_no}, {"EA", &(*map)->ea_texture,
+		&(*map)->checker->check_ea}, {NULL, NULL, NULL}};
 
 	i = 0;
 	while (texture_map[i].identifier && side)
@@ -36,7 +34,7 @@ int	fill_texture(t_map **map, char *side, char *texture)
 			if (*texture_map[i].check == 0)
 				*texture_map[i].texture = texture;
 			*texture_map[i].check = *texture_map[i].check + 1;
-			return (*texture_map[i].check - 1) ;
+			return (*texture_map[i].check - 1);
 		}
 		i++;
 	}
@@ -49,7 +47,7 @@ int	handle_texture(t_map **map, char *line)
 	char	*texture;
 	int		is_texture;
 	char	*trim_line;
-	
+
 	trim_line = ft_strtrim(line, "\n");
 	splited_line = ft_split(trim_line, ' ');
 	free(trim_line);

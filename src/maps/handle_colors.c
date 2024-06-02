@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 18:45:08 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/02 11:57:56 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,38 @@ int	pass_spaces(char *line)
 	return (i);
 }
 
+int	check_color(char **colors)
+{
+	int	j;
+	int	i;
+
+	i = 0;
+	j = 0;
+	while (colors[i])
+	{
+		while (colors[i][j])
+		{
+			if (!ft_isdigit(colors[i][j]))
+				return (0);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (1);
+}
+
 int32_t	get_colors(t_map **map, char *line, char identifier)
 {
 	int		i;
 	char	**colors;
 	int32_t	color;
-	char *trim_line;
+	char	*trim_line;
 
 	i = pass_spaces(line);
 	trim_line = ft_strtrim(line, "\n");
 	colors = ft_split(&trim_line[i], ',');
+	free(trim_line);
 	i = -1;
 	color = -1;
 	while (colors[++i])
@@ -52,36 +74,17 @@ int32_t	get_colors(t_map **map, char *line, char identifier)
 		}
 	}
 	if (i == 3 && check_color(colors))
-	{
-		color = ft_pixel(ft_atoi(colors[0]), ft_atoi(colors[1]), ft_atoi(colors[2]),
-			255);
-		if (identifier == 'F')
-			(*map)->checker->check_floor++;
-		else if (identifier == 'C')
-			(*map)->checker->check_ceiling++;
-	}
+		save_colors(colors, &color, map, identifier);
 	free_split(colors);
-	free(trim_line);
 	return (color);
 }
 
-int	check_color(char **colors)
-{ 
-	int i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while(colors[i])
-	{
-		while(colors[i][j])
-		{
-			if (!ft_isdigit(colors[i][j]))
-				return(0);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return(1);
+void	save_colors(char **colors, int32_t *color, t_map **map, char identifier)
+{
+	*color = ft_pixel(ft_atoi(colors[0]), ft_atoi(colors[1]),
+			ft_atoi(colors[2]), 255);
+	if (identifier == 'F')
+		(*map)->checker->check_floor++;
+	else if (identifier == 'C')
+		(*map)->checker->check_ceiling++;
 }
