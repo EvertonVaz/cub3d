@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/02 11:47:25 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:58:50 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	handle_error(NULL, fd);
 	map = fill_map_infos(fd);
 	handle_error(check_duplicates(map), 0);
+	validate_texture(&map);
 	printf("%s\n", map->path_map);
 	free_maps(&map);
 	return (0);

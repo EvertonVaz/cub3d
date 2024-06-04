@@ -1,14 +1,14 @@
 F 220,100,0
-WE               ./path_to_the_west_texture
+WE               ./assets/maps/arquivo_vazio.cub
 
 
-NO ./path_to_the_north_texture
+NO ./assets/maps/arquivo_vazio.cub
 
          C                                 225,30,0
-SO ./path_to_the_south_texture
+SO ./assets/maps/arquivo_sem_permissao.cub
 
 
-EA ./path_to_the_east_texture
+EA ./assets/maps/arquivo_vazio.cub
 
 
 

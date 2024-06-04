@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/02 11:48:14 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:54:43 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_map	*init_data(void);
 int		check_color(char **colors);
 void	save_colors(char **colors, int32_t *color, t_map **map,
 			char identifier);
+void	validate_texture(t_map **map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/02 11:49:24 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/03 21:05:45 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	handle_texture(t_map **map, char *line)
 	is_texture = 1;
 	if (splited_line && splited_line[0] && splited_line[1])
 	{
-		splited_line[1][ft_strlen(splited_line[1]) - 1] = '\0';
+		splited_line[1][ft_strlen(splited_line[1])] = '\0';
+		//tinha um -1 aqui, não sei pq, mas tirei pq tava comendo a última letra do path
 		texture = ft_strdup(splited_line[1]);
 		if (fill_texture(map, splited_line[0], texture))
 			free(texture);
@@ -63,4 +64,19 @@ int	handle_texture(t_map **map, char *line)
 		is_texture = 0;
 	free_split(splited_line);
 	return (is_texture);
+}
+
+void validate_texture(t_map **map)
+{
+	int fd;
+
+	fd = open((*map)->no_texture, O_RDONLY);
+	handle_error(NULL, fd);
+	fd = open((*map)->we_texture, O_RDONLY);
+	handle_error(NULL, fd);
+	fd = open((*map)->so_texture, O_RDONLY);
+	handle_error(NULL, fd);
+	fd = open((*map)->ea_texture, O_RDONLY);
+	handle_error(NULL, fd);
+//precisamos melhorar a função de erro pra essa situação, pra explicar onde está o erro de permissão e não ficar confuso
 }
