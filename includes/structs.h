@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:27:00 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/05 17:21:31 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 typedef struct s_player
 {
-	double		x;
+	int		x;
+	int		y;
 }				t_player;
 
 typedef struct s_checker
@@ -44,6 +45,7 @@ typedef struct s_map
 	int32_t		floor_color;
 	int32_t		ceiling_color;
 	t_checker	*checker;
+	t_player	*player;
 }				t_map;
 
 typedef struct s_texture_map

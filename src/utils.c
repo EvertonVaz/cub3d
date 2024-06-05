@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 11:53:10 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/05 17:22:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_maps(t_map **map)
 		free_split((*map)->map);
 	if (map && (*map)->checker)
 		free((*map)->checker);
+	if (map && (*map)->player)
+		free((*map)->player);
 	if (map && *map)
 		free(*map);
 }

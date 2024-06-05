@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 10:11:59 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:01:31 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int	verify_texture_path(char*texture)
 void	fill_texture(t_map **map, char *side, char *texture)
 {
 	int					i;
-	const t_texture_map	texture_map[5] = {{"WE", &(*map)->we_texture,
-		&(*map)->checker->check_we}, {"SO", &(*map)->so_texture,
-		&(*map)->checker->check_so}, {"NO", &(*map)->no_texture,
-		&(*map)->checker->check_no}, {"EA", &(*map)->ea_texture,
-		&(*map)->checker->check_ea}, {NULL, NULL, NULL}};
+	const t_texture_map	texture_map[5] = {
+	{"WE", &(*map)->we_texture, &(*map)->checker->check_we},
+	{"SO", &(*map)->so_texture, &(*map)->checker->check_so},
+	{"NO", &(*map)->no_texture, &(*map)->checker->check_no},
+	{"EA", &(*map)->ea_texture, &(*map)->checker->check_ea},
+	{NULL, NULL, NULL}
+	};
 
 	i = 0;
 	while (texture_map[i].identifier && side)

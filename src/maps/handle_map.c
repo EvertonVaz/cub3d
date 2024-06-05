@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 09:48:44 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:56:11 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,32 @@ t_map	*get_map_address(t_map *map)
 	if (!map_address)
 		map_address = map;
 	return (map_address);
+}
+
+t_map	*fill_width_height(t_map *map)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
+			{
+				map->player->x = j;
+				map->player->y = i;
+			}
+			j++;
+		}
+		if (map->map_width < j)
+				map->map_width = j;
+		i++;
+	}
+	map->map_height = i;
+	return (map);
 }
 
 char	**handle_map(char *line, int fd)
@@ -35,7 +61,8 @@ char	**handle_map(char *line, int fd)
 		i = 0;
 		while (1)
 		{
-			line[ft_strlen(line) - 1] = '\0';
+			if (ft_strchr(line, '\n'))
+				line[ft_strlen(line) - 1] = '\0';
 			map[i] = ft_strdup(line);
 			i++;
 			free(line);
@@ -84,7 +111,7 @@ t_map	*fill_map_infos(int fd)
 		else
 			map->map = handle_map(line, fd);
 		if (map->map)
-			return (map);
+			return (fill_width_height(map));
 		check_map_infos(line, map);
 		free(line);
 	}

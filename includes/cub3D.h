@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 10:03:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:10:46 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	free_maps(t_map **map);
 int		handle_error(char *msg, int num);
 t_map	*init_data(void);
 int		check_color(char **colors);
-void	save_colors(char **colors, int32_t *color, t_map **map,
-			char identifier);
-
+int32_t	save_colors(char **colors, t_map **map, char identifier);
+void	check_walls(t_map *map);
 #endif
