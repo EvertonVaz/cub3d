@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 10:04:37 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/05 10:11:59 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	fill_texture(t_map **map, char *side, char *texture)
 		{
 			if (*texture_map[i].check == 0)
 				*texture_map[i].texture = ft_strdup(texture);
-			*texture_map[i].check = *texture_map[i].check + verify_texture_path(texture);
+			*texture_map[i].check += verify_texture_path(texture);
 		}
 		i++;
 	};

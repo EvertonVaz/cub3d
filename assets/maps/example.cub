@@ -1,8 +1,8 @@
 
-WE ./assets/maps/arquivo_vazio.cub
-NO ./assets/maps/arquivo_vazio.cub
-SO ./assets/maps/arquivo_sem_permissao.cub
-EA ./assets/maps/arquivo_vazio.cub
+EA ./assets/textures/ea_test.img
+NO ./assets/textures/no_test.img
+SO ./assets/textures/so_test.img
+WE ./assets/textures/we_test.img
 
 F 220,100,0
 C 225,30,0
