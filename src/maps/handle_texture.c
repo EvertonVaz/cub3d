@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/03 21:05:45 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/05 10:04:37 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,18 @@ char	*check_side(char *identifier, char *side)
 	return (ft_strnstr(identifier, side, ft_strlen(identifier)));
 }
 
-int	fill_texture(t_map **map, char *side, char *texture)
+int	verify_texture_path(char*texture)
+{
+	int fd;
+
+	fd = open(texture, O_RDONLY);
+	close(fd);
+	if (fd < 0)
+		return (-10);
+	return (1);
+}
+
+void	fill_texture(t_map **map, char *side, char *texture)
 {
 	int					i;
 	const t_texture_map	texture_map[5] = {{"WE", &(*map)->we_texture,
@@ -32,51 +43,24 @@ int	fill_texture(t_map **map, char *side, char *texture)
 		if (check_side(texture_map[i].identifier, side))
 		{
 			if (*texture_map[i].check == 0)
-				*texture_map[i].texture = texture;
-			*texture_map[i].check = *texture_map[i].check + 1;
-			return (*texture_map[i].check - 1);
+				*texture_map[i].texture = ft_strdup(texture);
+			*texture_map[i].check = *texture_map[i].check + verify_texture_path(texture);
 		}
 		i++;
-	}
-	return (1);
+	};
 }
 
 int	handle_texture(t_map **map, char *line)
 {
 	char	**splited_line;
-	char	*texture;
 	int		is_texture;
-	char	*trim_line;
 
-	trim_line = ft_strtrim(line, "\n");
-	splited_line = ft_split(trim_line, ' ');
-	free(trim_line);
+	splited_line = ft_split(line, ' ');
 	is_texture = 1;
 	if (splited_line && splited_line[0] && splited_line[1])
-	{
-		splited_line[1][ft_strlen(splited_line[1])] = '\0';
-		//tinha um -1 aqui, não sei pq, mas tirei pq tava comendo a última letra do path
-		texture = ft_strdup(splited_line[1]);
-		if (fill_texture(map, splited_line[0], texture))
-			free(texture);
-	}
+		fill_texture(map, splited_line[0], splited_line[1]);
 	if (ft_strchr(splited_line[0], 'F') || ft_strchr(splited_line[0], 'C'))
 		is_texture = 0;
 	free_split(splited_line);
 	return (is_texture);
-}
-
-void validate_texture(t_map **map)
-{
-	int fd;
-
-	fd = open((*map)->no_texture, O_RDONLY);
-	handle_error(NULL, fd);
-	fd = open((*map)->we_texture, O_RDONLY);
-	handle_error(NULL, fd);
-	fd = open((*map)->so_texture, O_RDONLY);
-	handle_error(NULL, fd);
-	fd = open((*map)->ea_texture, O_RDONLY);
-	handle_error(NULL, fd);
-//precisamos melhorar a função de erro pra essa situação, pra explicar onde está o erro de permissão e não ficar confuso
 }

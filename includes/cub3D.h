@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/03 20:54:43 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/05 10:03:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_map	*get_map_address(t_map *map);
 t_map	*fill_map_infos(int fd);
 int32_t	get_colors(t_map **map, char *line, char identifier);
 int		handle_texture(t_map **map, char *line);
-int		fill_texture(t_map **map, char *side, char *texture);
 char	*check_duplicates(t_map *map);
 void	free_maps(t_map **map);
 int		handle_error(char *msg, int num);
@@ -36,6 +35,5 @@ t_map	*init_data(void);
 int		check_color(char **colors);
 void	save_colors(char **colors, int32_t *color, t_map **map,
 			char identifier);
-void	validate_texture(t_map **map);
 
 #endif

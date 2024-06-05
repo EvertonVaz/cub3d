@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/05/30 14:42:24 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/05 09:48:44 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_map	*fill_map_infos(int fd)
 		line = get_next_line(fd);
 		if (!line)
 			return (map);
+		line[ft_strlen(line) - 1] = '\0';
 		handle_texture(&map, line);
 		if (ft_strchr(line, 'C'))
 			map->ceiling_color = get_colors(&map, line, 'C');
