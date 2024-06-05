@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 17:01:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:17:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	verify_texture_path(char*texture)
 	int fd;
 
 	fd = open(texture, O_RDONLY);
-	close(fd);
 	if (fd < 0)
 		return (-10);
+	close(fd);
 	return (1);
 }
 
