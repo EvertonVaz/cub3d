@@ -1,0 +1,6 @@
+.gitignore
+bin/
+**test.c
+**cub3D
+**libft.a
+build/
