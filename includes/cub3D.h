@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 12:10:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 09:44:48 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ t_map	*init_data(void);
 int		check_color(char **colors);
 int32_t	save_colors(char **colors, t_map **map, char identifier);
 void	check_walls(t_map *map);
+void	get_player_posicion(t_map *map, int x, int y);
+
 #endif

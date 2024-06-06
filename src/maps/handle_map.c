@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 17:56:11 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 09:44:00 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,23 @@ t_map	*get_map_address(t_map *map)
 
 t_map	*fill_width_height(t_map *map)
 {
-	int		i;
-	int		j;
+	int	y;
+	int	x;
 
-	i = 0;
-	while (map->map[i])
+	y = 0;
+	while (map->map[y])
 	{
-		j = 0;
-		while (map->map[i][j])
+		x = 0;
+		while (map->map[y][x])
 		{
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
-			{
-				map->player->x = j;
-				map->player->y = i;
-			}
-			j++;
+			get_player_posicion(map, x, y);
+			x++;
 		}
-		if (map->map_width < j)
-				map->map_width = j;
-		i++;
+		if (map->map_width < x)
+			map->map_width = x;
+		y++;
 	}
-	map->map_height = i;
+	map->map_height = y;
 	return (map);
 }
 

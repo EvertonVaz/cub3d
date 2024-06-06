@@ -17,7 +17,7 @@ BIN_PATH		:= ./bin/
 LIBFT			:= libft.a
 
 FILES			:= \
-	main.c check_args.c utils.c \
+	main.c check_args.c utils.c player.c \
 	maps/handle_map.c maps/handle_texture.c maps/handle_colors.c maps/check_duplicates.c maps/check_map.c \
 
 

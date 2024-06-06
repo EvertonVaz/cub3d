@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 17:21:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 09:52:46 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
+	int			direction;
 }				t_player;
 
 typedef struct s_checker
@@ -34,6 +35,8 @@ typedef struct s_checker
 
 typedef struct s_map
 {
+	int			screen_width;
+	int			screen_height;
 	char		*path_map;
 	char		**map;
 	int			map_width;

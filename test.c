@@ -3,13 +3,16 @@
 // See README in the root project for more information.
 // -----------------------------------------------------------------------------
 
-#include "../includes/cub3D.h"
 
+#include "./libs/MLX42/include/MLX42/MLX42.h"
+#include <fcntl.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 #define mapWidth 24
 #define mapHeight 24
-#define screenWidth 1000
-#define screenHeight 1000
+#define screenWidth 1200
+#define screenHeight 800
 
 static mlx_image_t* image;
 
