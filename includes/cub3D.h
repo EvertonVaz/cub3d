@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 15:25:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:34:03 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	check_walls(t_cub *cub);
 void	get_player_posicion(t_cub *cub, int x, int y);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	draw_map(void *param);
-void	player_walk(void *param);
+void	player_walk(mlx_key_data_t key, void *param);
 
 #endif

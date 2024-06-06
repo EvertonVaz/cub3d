@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 11:33:32 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:26:22 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	get_player_posicion(t_cub *cub, int x, int y)
 		cub->player->x = x;
 		cub->player->y = y;
 		cub->map[y][x] = '0';
+		cub->player->render = 0;
 	}
 }

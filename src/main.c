@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 15:28:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:33:07 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int	main(int argc, char **argv)
 	cub->screen->img = mlx_new_image(cub->screen->mlx, WIDTH, HEIGHT);
 
 	mlx_image_to_window(cub->screen->mlx, cub->screen->img, 0, 0);
-	mlx_loop_hook(cub->screen->mlx, player_walk, cub);
-	mlx_loop_hook(cub->screen->mlx, draw_map, cub);
+	draw_map(cub);
+	mlx_key_hook(cub->screen->mlx, player_walk, cub);
+	if (1 < 2)
+		cub->player->render = 0;
+	// mlx_loop_hook(cub->screen->mlx, player_walk, cub);
 
 	mlx_loop(cub->screen->mlx);
 	mlx_terminate(cub->screen->mlx);
