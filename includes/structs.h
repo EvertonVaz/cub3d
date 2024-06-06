@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 10:07:05 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:15:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define STRUCTS_H
 
 # include <stdint.h>
+# include "../libs/MLX42/include/MLX42/MLX42.h"
+
+# define WIDTH 1200
+# define HEIGHT 900
 
 typedef struct s_player
 {
@@ -33,10 +37,14 @@ typedef struct s_checker
 	int			check_infos;
 }				t_checker;
 
-typedef struct s_map
+typedef struct s_screen
 {
-	int			screen_width;
-	int			screen_height;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+}				t_screen;
+
+typedef struct s_cub
+{
 	char		*path_map;
 	char		**map;
 	int			map_width;
@@ -47,17 +55,11 @@ typedef struct s_map
 	char		*ea_texture;
 	int32_t		floor_color;
 	int32_t		ceiling_color;
+	t_screen	*screen;
 	t_checker	*checker;
 	t_player	*player;
-}				t_map;
+}				t_cub;
 
-typedef struct s_screen
-{
-	void		*mlx;
-	void		*img;
-	int			width;
-	int			height;
-}				t_screen;
 
 typedef struct s_texture_map
 {

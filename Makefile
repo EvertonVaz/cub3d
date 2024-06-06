@@ -19,6 +19,8 @@ LIBFT			:= libft.a
 FILES			:= \
 	main.c check_args.c utils.c player.c \
 	maps/handle_map.c maps/handle_texture.c maps/handle_colors.c maps/check_duplicates.c maps/check_map.c \
+	render/map_render.c \
+	moves/player_walk.c
 
 
 HEADERS			:= -I ./cub3d.h -I $(LIBMLX_PATH)/include -I ./libft
@@ -54,6 +56,8 @@ $(NAME): $(OBJS)
 $(BIN_PATH):
 	@mkdir -p $(BIN_PATH)
 	@mkdir -p $(BIN_PATH)maps
+	@mkdir -p $(BIN_PATH)render
+	@mkdir -p $(BIN_PATH)moves
 
 clean:
 	@echo $(RED)[Removing Objects]$(COLOR_LIMITER)

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 12:11:24 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:30:29 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_color(char **colors)
 	return (1);
 }
 
-int32_t	get_colors(t_map **map, char *line, char identifier)
+int32_t	get_colors(t_cub **cub, char *line, char identifier)
 {
 	int		i;
 	char	**colors;
@@ -64,12 +64,12 @@ int32_t	get_colors(t_map **map, char *line, char identifier)
 		}
 	}
 	if (i == 3 && check_color(colors))
-		color = save_colors(colors, map, identifier);
+		color = save_colors(colors, cub, identifier);
 	free_split(colors);
 	return (color);
 }
 
-int32_t	save_colors(char **colors, t_map **map, char identifier)
+int32_t	save_colors(char **colors, t_cub **cub, char identifier)
 {
 	int32_t	red;
 	int32_t	green;
@@ -79,8 +79,8 @@ int32_t	save_colors(char **colors, t_map **map, char identifier)
 	green = ft_atoi(colors[1]);
 	blue = ft_atoi(colors[2]);
 	if (identifier == 'F')
-		(*map)->checker->check_floor++;
+		(*cub)->checker->check_floor++;
 	else if (identifier == 'C')
-		(*map)->checker->check_ceiling++;
+		(*cub)->checker->check_ceiling++;
 	return (ft_pixel(red, green, blue, 255));
 }

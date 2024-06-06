@@ -6,45 +6,43 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 10:02:34 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:28:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-t_map	*get_map_infos(int argc, char **argv)
+t_cub	*get_map_infos(int argc, char **argv)
 {
-	t_map	*map;
+	t_cub	*cub;
 	int		fd;
 
-	map = get_map_address(NULL);
-	fd = open(map->path_map, O_RDONLY);
+	cub = check_args_init_data(argc, argv);
+	fd = open(cub->path_map, O_RDONLY);
 	handle_error(NULL, fd);
-	map = fill_map_infos(fd);
-	handle_error(check_duplicates(map), 0);
-	check_walls(map);
+	cub = fill_map_infos(fd, cub);
+	handle_error(check_duplicates(cub), 0);
+	check_walls(cub);
 	close(fd);
-	map->map[map->player->y][map->player->x] = map->player->direction;
-	return (map);
-}
-
-void	print_map(t_map *map)
-{
-	int	y;
-
-	y = -1;
-	while (map->map[++y])
-		printf("%s\n", map->map[y]);
+	return (cub);
 }
 
 int	main(int argc, char **argv)
 {
-	t_map		*map;
-	t_screen	*screen;
+	t_cub		*cub;
 
-	map = get_map_infos(argc, argv);
-	print_map(map);
-	printf("O PROGRAMA CHEGOU NO FIM! %s\n", map->path_map);
-	free_maps(&map);
+	cub = get_map_infos(argc, argv);
+
+	cub->screen->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	cub->screen->img = mlx_new_image(cub->screen->mlx, WIDTH, HEIGHT);
+
+	mlx_image_to_window(cub->screen->mlx, cub->screen->img, 0, 0);
+	mlx_loop_hook(cub->screen->mlx, player_walk, cub);
+	mlx_loop_hook(cub->screen->mlx, draw_map, cub);
+
+	mlx_loop(cub->screen->mlx);
+	mlx_terminate(cub->screen->mlx);
+	printf("O PROGRAMA CHEGOU NO FIM! %s\n", cub->path_map);
+	free_maps(&cub);
 	return (0);
 }
