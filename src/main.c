@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 09:59:39 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:02:34 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ t_map	*get_map_infos(int argc, char **argv)
 	t_map	*map;
 	int		fd;
 
-	map = NULL;
-	check_args_return_path_map(argc, argv, &map);
+	map = get_map_address(NULL);
 	fd = open(map->path_map, O_RDONLY);
 	handle_error(NULL, fd);
 	map = fill_map_infos(fd);

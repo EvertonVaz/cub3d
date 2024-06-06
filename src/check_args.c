@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:11:11 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 09:59:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:07:00 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_map	*init_data(void)
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
+	map->screen_width = 1200;
+	map->screen_height = 800;
 	map->map_width = 0;
 	map->map_height = 0;
 	map->we_texture = NULL;
