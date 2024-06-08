@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 17:32:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/08 11:25:56 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ void	draw_square(t_cub *cub, int x, int y, int32_t color)
 {
 	int	x_square;
 	int	y_square;
+	int	x_end;
+	int	y_end;
 
+	x_end = (x + 1) * WIDTH / cub->map_width;
+	y_end = (y + 1) * HEIGHT / cub->map_height;
 	y_square = y * HEIGHT / cub->map_height;
-	while (y_square < HEIGHT)
+	while (y_square < y_end)
 	{
 		x_square = x * WIDTH / cub->map_width;
-		while (x_square < WIDTH)
+		while (x_square < x_end)
 		{
 			mlx_put_pixel(cub->screen->img, x_square, y_square, color);
 			x_square++;
