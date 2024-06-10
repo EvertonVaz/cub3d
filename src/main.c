@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 15:46:50 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:25:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,6 @@ t_cub	*get_map_infos(int argc, char **argv)
 	return (cub);
 }
 
-void	paint_background(t_cub *cub)
-{
-	int	half = HEIGHT / 2;
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y <= half)
-	{
-		x = -1;
-		while (++x < WIDTH)
-			mlx_put_pixel(cub->mlx->img, x, y, ft_pixel(150, 75, 150, 255));
-	}
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-			mlx_put_pixel(cub->mlx->img, x, y, ft_pixel(75, 150, 75, 255));
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_cub		*cub;
@@ -55,7 +34,6 @@ int	main(int argc, char **argv)
 	cub = get_map_infos(argc, argv);
 	cub->mlx->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	cub->mlx->img = mlx_new_image(cub->mlx->mlx, WIDTH, HEIGHT);
-	paint_background(cub);
 	mlx_image_to_window(cub->mlx->mlx, cub->mlx->img, 0, 0);
 	draw_map(cub);
 	mlx_key_hook(cub->mlx->mlx, player_walk, cub);

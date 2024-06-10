@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 17:07:40 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:48:10 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	get_player_posicion(t_cub *cub, int x, int y)
 	{
 		player_direction(cub->player, cub->map[y][x]);
 		cub->player->direction = cub->map[y][x];
-		cub->player->x = x;
-		cub->player->y = y;
+		cub->player->x = (double)x;
+		cub->player->y = (double)y;
 		cub->map[y][x] = '0';
 	}
 }

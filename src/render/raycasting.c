@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 17:03:50 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:59:33 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	side_dist(t_ray *ray, t_player *player)
 	}
 }
 
-int	hit(t_cub *cub, t_ray * ray)
+int	hit(t_cub *cub)
 {
+	t_ray	*ray;
+
+	ray = cub->ray;
 	if (ray->side_dist_x < ray->side_dist_y)
 	{
 		ray->side_dist_x += ray->delta_dist_x;
@@ -109,7 +112,7 @@ void	raycasting(t_cub *cub)
 	{
 		init_ray(player, ray);
 		side_dist(ray, player);
-		while (hit(cub, ray) == 0)
+		while (hit(cub) == 0)
 			;
 		if (ray->side == 0)
 			ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 16:46:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:59:09 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,32 @@
 int	player_move(t_cub *cub)
 {
 	mlx_t	*mlx;
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 
 	mlx = cub->mlx->mlx;
 	x = cub->player->x;
 	y = cub->player->y;
-	if (mlx_is_key_down(mlx, MLX_KEY_W) && cub->map[y - 1][x] == '0')
-		cub->player->y--;
-	if (mlx_is_key_down(mlx, MLX_KEY_S) && cub->map[y + 1][x] == '0')
-		cub->player->y++;
-	if (mlx_is_key_down(mlx, MLX_KEY_A) && cub->map[y][x - 1] == '0')
-		cub->player->x--;
-	if (mlx_is_key_down(mlx, MLX_KEY_D) && cub->map[y][x + 1] == '0')
-		cub->player->x++;
+	if (mlx_is_key_down(mlx, MLX_KEY_W) && !hit(cub))
+	{
+		cub->player->x += cub->player->dir_x;
+		cub->player->y += cub->player->dir_y;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
+		cub->player->x -= cub->player->dir_x;
+		cub->player->y -= cub->player->dir_y;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
+		cub->player->y += cub->player->dir_x;
+		cub->player->x -= cub->player->dir_y;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
+		cub->player->y -= cub->player->dir_x;
+		cub->player->x += cub->player->dir_y;
+	}
 	return (y != cub->player->y || x != cub->player->x);
 }
 
@@ -41,6 +53,6 @@ void	player_walk(mlx_key_data_t key, void *param)
 	if (player_move(cub))
 	{
 		draw_map(cub);
-		printf("Player position: x = %d, y = %d\n", cub->player->x, cub->player->y);
+		printf("Player position: x = %d, y = %d\n", (int)cub->player->x, (int)cub->player->y);
 	}
 }
