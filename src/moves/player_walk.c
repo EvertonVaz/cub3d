@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_walk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/08 10:52:22 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/10 16:46:22 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int	player_move(t_cub *cub)
 	int		x;
 	int		y;
 
-	mlx = cub->screen->mlx;
+	mlx = cub->mlx->mlx;
 	x = cub->player->x;
 	y = cub->player->y;
-	if (mlx_is_key_down(mlx, MLX_KEY_W) && cub->map[y - 1][x] != '1')
+	if (mlx_is_key_down(mlx, MLX_KEY_W) && cub->map[y - 1][x] == '0')
 		cub->player->y--;
-	if (mlx_is_key_down(mlx, MLX_KEY_S) && cub->map[y + 1][x] != '1')
+	if (mlx_is_key_down(mlx, MLX_KEY_S) && cub->map[y + 1][x] == '0')
 		cub->player->y++;
-	if (mlx_is_key_down(mlx, MLX_KEY_A) && cub->map[y][x - 1] != '1')
+	if (mlx_is_key_down(mlx, MLX_KEY_A) && cub->map[y][x - 1] == '0')
 		cub->player->x--;
-	if (mlx_is_key_down(mlx, MLX_KEY_D) && cub->map[y][x + 1] != '1')
+	if (mlx_is_key_down(mlx, MLX_KEY_D) && cub->map[y][x + 1] == '0')
 		cub->player->x++;
 	return (y != cub->player->y || x != cub->player->x);
 }
@@ -37,7 +37,7 @@ void	player_walk(mlx_key_data_t key, void *param)
 	t_cub *cub = (t_cub *)param;
 
 	if (key.key == MLX_KEY_ESCAPE)
-		mlx_close_window(cub->screen->mlx);
+		mlx_close_window(cub->mlx->mlx);
 	if (player_move(cub))
 	{
 		draw_map(cub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/08 11:22:23 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:07:40 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	player_direction(t_player *player, char direction)
 	if (direction == 'N')
 	{
 		player->dir_x = 0;
-		player->dir_y = 1;
+		player->dir_y = -1;
 	}
 	else if (direction == 'S')
 	{
 		player->dir_x = 0;
-		player->dir_y = -1;
+		player->dir_y = 1;
 	}
 	else if (direction == 'E')
 	{
@@ -48,4 +48,3 @@ void	get_player_posicion(t_cub *cub, int x, int y)
 		cub->map[y][x] = '0';
 	}
 }
-

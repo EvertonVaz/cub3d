@@ -3,34 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/08 11:25:56 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/10 16:57:40 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+int32_t	color_choice(char posicion)
+{
+	if (posicion == '0')
+		return (ft_pixel(255, 255, 255, 255));
+	if (posicion == '3')
+		return (ft_pixel(255, 0, 0, 255));
+	if (posicion == '2')
+		return (ft_pixel(0, 0, 255, 255));
+	return (ft_pixel(0, 0, 0, 255));
+}
+
 void	draw_square(t_cub *cub, int x, int y, int32_t color)
 {
-	int	x_square;
-	int	y_square;
-	int	x_end;
-	int	y_end;
+	int	i;
+	int	j;
 
-	x_end = (x + 1) * WIDTH / cub->map_width;
-	y_end = (y + 1) * HEIGHT / cub->map_height;
-	y_square = y * HEIGHT / cub->map_height;
-	while (y_square < y_end)
+	i = 0;
+	while (i < TILE_SIZE)
 	{
-		x_square = x * WIDTH / cub->map_width;
-		while (x_square < x_end)
+		j = 0;
+		while (j < TILE_SIZE)
 		{
-			mlx_put_pixel(cub->screen->img, x_square, y_square, color);
-			x_square++;
+			mlx_put_pixel(cub->mlx->img, (x + j), (y + i), color);
+			j++;
 		}
-		y_square++;
+		i++;
 	}
 }
 
@@ -48,12 +55,11 @@ void	draw_map(void *param)
 		x = -1;
 		while (++x < cub->map_width)
 		{
-			color = ft_pixel(0, 0, 0, 255);
-			if (cub->map[y][x] == '0')
-				color = ft_pixel(255, 255, 255, 255);
+			color = color_choice(cub->map[y][x]);
 			if (cub->player->y == y && cub->player->x == x)
 				color = ft_pixel(255, 0, 0, 255);
-			draw_square(cub, x, y, color);
+			draw_square(cub, x * TILE_SIZE, y * TILE_SIZE, color);
 		}
 	}
+	raycasting(cub);
 }

@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/08 10:56:48 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/10 16:57:25 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include <stdint.h>
 # include "../libs/MLX42/include/MLX42/MLX42.h"
+# include <stdint.h>
 
-# define WIDTH 1200
-# define HEIGHT 900
+# define WIDTH 800
+# define HEIGHT 800
+# define TILE_SIZE 8
 
 typedef struct s_player
 {
@@ -26,6 +27,10 @@ typedef struct s_player
 	int			direction;
 	int			dir_x;
 	int			dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		move_speed;
+	double		rot_speed;
 }				t_player;
 
 typedef struct s_checker
@@ -39,11 +44,32 @@ typedef struct s_checker
 	int			check_infos;
 }				t_checker;
 
-typedef struct s_screen
+typedef struct s_mlx
 {
-	mlx_t			*mlx;
-	mlx_image_t		*img;
-}				t_screen;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+}				t_mlx;
+
+typedef struct s_ray
+{
+	double		camera_x;
+	double		dir_x;
+	double		dir_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	double		perp_wall_dist;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+}				t_ray;
 
 typedef struct s_cub
 {
@@ -57,11 +83,11 @@ typedef struct s_cub
 	char		*ea_texture;
 	int32_t		floor_color;
 	int32_t		ceiling_color;
-	t_screen	*screen;
+	t_mlx		*mlx;
 	t_checker	*checker;
 	t_player	*player;
+	t_ray		*ray;
 }				t_cub;
-
 
 typedef struct s_texture_map
 {
