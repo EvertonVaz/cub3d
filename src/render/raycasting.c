@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 22:18:40 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/11 12:04:45 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	init_ray(t_player *player, t_ray *ray)
+void	init_ray(t_player *player, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * player->x / (double)WIDTH - 1;
+	ray->camera_x = 2 * x / (double)WIDTH - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->map_x = (int)player->x;
@@ -66,7 +66,7 @@ int	hit(t_cub *cub)
 		ray->side = 1;
 	}
 	if (cub->map[ray->map_y][ray->map_x] == '1')
-		ray->hit = 1;
+			ray->hit = 1;
 	return (ray->hit);
 }
 
@@ -110,7 +110,7 @@ void	raycasting(t_cub *cub)
 	x = -1;
 	while (++x < WIDTH)
 	{
-		init_ray(player, ray);
+		init_ray(player, ray, x);
 		side_dist(ray, player);
 		while (hit(cub) == 0)
 			;

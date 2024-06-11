@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 21:21:59 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/11 09:37:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_player
 	double		x;
 	double		y;
 	int			direction;
-	int			dir_x;
-	int			dir_y;
+	double		dir_x;
+	double		dir_y;
 	double		plane_x;
 	double		plane_y;
 	double		move_speed;
