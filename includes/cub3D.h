@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 17:58:43 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:54:52 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+
+# define WIDTH 800
+# define HEIGHT 800
+# define TILE_SIZE 8
+# define SPEED 0.1
 
 t_cub	*check_args_init_data(int argc, char **argv);
 t_cub	*get_map_address(t_cub *cub);

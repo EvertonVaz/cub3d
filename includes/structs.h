@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 17:47:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:21:59 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 # include <stdint.h>
-
-# define WIDTH 800
-# define HEIGHT 800
-# define TILE_SIZE 8
 
 typedef struct s_player
 {

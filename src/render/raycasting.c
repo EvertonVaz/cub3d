@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 17:59:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:18:40 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_line(t_cub *cub, int x)
 		if (cub->map[ray->map_y][ray->map_x] == '1')
 			color = ft_pixel(255, 0, 0, 255);
 		if (cub->map[ray->map_y][ray->map_x] == '2')
-			color = ft_pixel(0, 0, 255, 255);
+			color = ft_pixel(255, 255, 255, 255);
 		if(ray->side == 1)
 			color = color / 2;
 		mlx_put_pixel(cub->mlx->img, x, ray->draw_start, color);
