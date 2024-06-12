@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 11:29:59 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:10:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-t_cub	*get_map_address(t_cub *cub)
+t_cub	*get_address(t_cub *cub)
 {
 	static t_cub	*map_address;
 

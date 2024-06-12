@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/11 10:02:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:11:38 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SPEED 0.1
 
 t_cub	*check_args_init_data(int argc, char **argv);
-t_cub	*get_map_address(t_cub *cub);
+t_cub	*get_address(t_cub *cub);
 t_cub	*fill_map_infos(int fd, t_cub *cub);
 int32_t	get_colors(t_cub **cub, char *line, char identifier);
 int		handle_texture(t_cub **cub, char *line);

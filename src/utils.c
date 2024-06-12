@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 11:34:48 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:10:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	handle_error(char *msg, int num)
 {
 	t_cub	*cub;
 
-	cub = get_map_address(NULL);
+	cub = get_address(NULL);
 	if (num == -1)
 	{
 		free_maps(&cub);

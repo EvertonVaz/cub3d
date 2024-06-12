@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:29:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 11:31:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:10:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_directional(int y, int x)
 {
 	t_cub	*cub;
 
-	cub = get_map_address(NULL);
+	cub = get_address(NULL);
 	if(cub->map[y][x + 1] < '0' || cub->map[y][x + 1] > '1') // olhando para a direita
 		handle_error("olhando para a direita\n", 0);
 	if(cub->map[y][x - 1] < '0' || cub->map[y][x - 1] > '1') // olhando para a esquerda
@@ -31,7 +31,7 @@ void	check_diagonal(int y, int x)
 {
 	t_cub	*cub;
 
-	cub = get_map_address(NULL);
+	cub = get_address(NULL);
 	if(cub->map[y - 1][x - 1] < '0' || cub->map[y - 1][x - 1] > '1') // olhando para a diagonal esquerda superior
 		handle_error("diagonal sup esq\n", 0);
 	if(cub->map[y - 1][x + 1] < '0' || cub->map[y - 1][x + 1] > '1') // olhando para a diagonal direita superior
