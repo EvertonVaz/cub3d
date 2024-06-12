@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/11 21:13:52 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/12 09:13:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	hit(t_cub *cub)
 		ray->map_y += ray->step_y;
 		ray->side = 1;
 	}
+	if ((ray->map_x < 0 || ray->map_x > cub->map_width) || (ray->map_y < 0 || ray->map_y > cub->map_height))
+		return (ray->hit = 1);
 	if (cub->map[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 	return (ray->hit);
@@ -86,6 +88,8 @@ void	draw_line(t_cub *cub, int x)
 	while (ray->draw_start < ray->draw_end)
 	{
 		color = ft_pixel(0, 0, 0, 255);
+		if ((ray->map_x < 0 || ray->map_x > cub->map_width) || (ray->map_y < 0 || ray->map_y > cub->map_height))
+			break ;
 		if (cub->map[ray->map_y][ray->map_x] == '3')
 			color = ft_pixel(255, 255, 255, 255);
 		if (cub->map[ray->map_y][ray->map_x] == '1')
