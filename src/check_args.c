@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:11:11 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 09:44:15 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:46:34 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	init_player(t_player *player)
 	player->x = 0;
 	player->y = 0;
 	player->direction = 0;
-	player->plane_x = 0;
-	player->plane_y = 0.66;
 }
 
 t_cub	*init_data(void)
