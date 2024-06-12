@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 09:13:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:25:44 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,8 @@ void	draw_line(t_cub *cub, int x)
 	while (ray->draw_start < ray->draw_end)
 	{
 		color = ft_pixel(0, 0, 0, 255);
-		if ((ray->map_x < 0 || ray->map_x > cub->map_width) || (ray->map_y < 0 || ray->map_y > cub->map_height))
-			break ;
-		if (cub->map[ray->map_y][ray->map_x] == '3')
-			color = ft_pixel(255, 255, 255, 255);
-		if (cub->map[ray->map_y][ray->map_x] == '1')
-			color = ft_pixel(0, 0, 0, 255);
-		if (cub->map[ray->map_y][ray->map_x] == '2')
-			color = ft_pixel(255, 255, 255, 255);
 		if(ray->side == 1)
-			color = color / 2;
+			color = color / 8;
 		mlx_put_pixel(cub->mlx->img, x, ray->draw_start, color);
 		ray->draw_start++;
 	}
