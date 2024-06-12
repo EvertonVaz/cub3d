@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 21:49:19 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/06/11 18:55:14 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	paint_background(t_cub *cub)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			mlx_put_pixel(cub->mlx->img, x, y, ft_pixel(150, 75, 150, 255));
+			mlx_put_pixel(cub->mlx->img, x, y, cub->ceiling_color);
 	}
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			mlx_put_pixel(cub->mlx->img, x, y, ft_pixel(75, 150, 75, 255));
+			mlx_put_pixel(cub->mlx->img, x, y, cub->floor_color);
 	}
 }
 

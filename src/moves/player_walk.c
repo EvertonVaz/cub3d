@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_walk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/11 10:03:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:05:36 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	up_down(t_cub *cub)
 	if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_W))
 	{
 		printf("é parede X? %c\n", cub->map[(int)(y + dir_y * SPEED)][(int)x]);
-		if (cub->map[(int)(y + dir_y * SPEED)][(int)cub->player->x] == '0')
+		if (cub->map[(int)(y + dir_y * SPEED)][(int)cub->player->x] != '1')
 			cub->player->x += cub->player->dir_x * SPEED;
 		printf("é parede Y? %c\n", cub->map[(int)y][(int)(x + dir_x * SPEED)]);
-		if (cub->map[(int)cub->player->y][(int)(x + dir_x * SPEED)] == '0')
+		if (cub->map[(int)cub->player->y][(int)(x + dir_x * SPEED)] != '1')
 			cub->player->y += cub->player->dir_y * SPEED;
 	}
 	else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_S))
 	{
-		if (cub->map[(int)(y - dir_y * SPEED)][(int)cub->player->x] == '0')
+		if (cub->map[(int)(y - dir_y * SPEED)][(int)cub->player->x] != '1')
 			cub->player->x -= cub->player->dir_x * SPEED;
-		if (cub->map[(int)cub->player->y][(int)(x - dir_x * SPEED)] == '0')
+		if (cub->map[(int)cub->player->y][(int)(x - dir_x * SPEED)] != '1')
 			cub->player->y -= cub->player->dir_y * SPEED;
 	}
 	return (y != cub->player->y || x != cub->player->x);
@@ -58,9 +58,9 @@ void rotate_player(t_player *player, double rot_speed)
 int	rotate(t_cub *cub)
 {
     if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_A))
-        rotate_player(cub->player, SPEED);
-    else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_D))
         rotate_player(cub->player, -SPEED);
+    else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_D))
+        rotate_player(cub->player, SPEED);
     return (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_A) || mlx_is_key_down(cub->mlx->mlx, MLX_KEY_D));
 }
 
