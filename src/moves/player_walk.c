@@ -6,13 +6,14 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 08:55:45 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/12 08:58:13 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-int up_down(t_cub *cub) {
+int up_down(t_cub *cub)
+{
     double new_x;
     double new_y;
     double x;
@@ -25,24 +26,23 @@ int up_down(t_cub *cub) {
     dir_x = cub->player->dir_x;
     dir_y = cub->player->dir_y;
 
-    if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_W)) {
+    if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_W))
+	{
         new_x = x + dir_x * SPEED;
         new_y = y + dir_y * SPEED;
-        if (cub->map[(int)y][(int)new_x] != '1') {
+        if (cub->map[(int)y][(int)new_x] != '1')
             cub->player->x = new_x;
-        }
-        if (cub->map[(int)new_y][(int)x] != '1') {
+        if (cub->map[(int)new_y][(int)x] != '1')
             cub->player->y = new_y;
-        }
-    } else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_S)) {
+    }
+	else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_S))
+	{
         new_x = x - dir_x * SPEED;
         new_y = y - dir_y * SPEED;
-        if (cub->map[(int)y][(int)new_x] != '1') {
+        if (cub->map[(int)y][(int)new_x] != '1')
             cub->player->x = new_x;
-        }
-        if (cub->map[(int)new_y][(int)x] != '1') {
+        if (cub->map[(int)new_y][(int)x] != '1')
             cub->player->y = new_y;
-        }
     }
     return (y != cub->player->y || x != cub->player->x);
 }
