@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 12:56:36 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:40:09 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	get_player_posicion(t_cub *cub, int x, int y)
 		cub->checker->check_player++;
 		player_direction(cub->player, cub->map[y][x]);
 		cub->player->direction = cub->map[y][x];
-		cub->player->x = (double)x;
-		cub->player->y = (double)y;
+		cub->player->x = (double)x + 0.5;
+		cub->player->y = (double)y + 0.5;
 		cub->map[y][x] = '0';
 	}
 }
