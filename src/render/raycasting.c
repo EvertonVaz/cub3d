@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 12:49:37 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:08:29 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,20 @@ void	draw_line(t_cub *cub, int x)
 		ray->draw_end = HEIGHT - 1;
 	while (ray->draw_start < ray->draw_end)
 	{
-		color = ft_pixel(0, 0, 0, 255);
-		if(ray->side == 1)
-			color = color / 8;
+		if (ray->side == 0) // Lado vertical (Leste/Oeste)
+		{
+			if (ray->dir_x > 0)
+				color = ft_pixel(255, 255, 0, 255); // Leste (Amarelo)
+			else
+				color = ft_pixel(255, 0, 0, 255); // Oeste (Vermelho)
+		}
+		else // Lado horizontal (Norte/Sul)
+		{
+			if (ray->dir_y > 0)
+				color = ft_pixel(0, 0, 0, 255); // Sul (Preto)
+			else
+				color = ft_pixel(0, 0, 255, 255); // Norte (Azul)
+		}
 		mlx_put_pixel(cub->mlx->img, x, ray->draw_start, color);
 		ray->draw_start++;
 	}
