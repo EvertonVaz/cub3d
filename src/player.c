@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 09:44:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 10:40:14 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	player_direction(t_player *player, char direction)
 	if (direction == 'N')
 	{
 		player->dir_x = 0;
-		player->dir_y = -1;
+		player->dir_y = 1;
 	}
 	else if (direction == 'S')
 	{
 		player->dir_x = 0;
-		player->dir_y = 1;
+		player->dir_y = -1;
 	}
 	else if (direction == 'E')
 	{
