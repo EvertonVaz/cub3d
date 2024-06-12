@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:56:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 11:32:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:44:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*check_duplicates(t_cub *cub)
 		return ("Error\nCheck Floor color\n");
 	if (cub->checker->check_ceiling != 1)
 		return ("Error\nCheck Ceiling color\n");
+	if (cub->checker->check_player != 1)
+		return ("Error\nCheck Player position\n");
 	if (cub->checker->check_infos)
 		return ("Error\nInvalid map\n");
 	return (NULL);

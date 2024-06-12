@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 17:25:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:35:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cub	*get_map_infos(int argc, char **argv)
 	handle_error(NULL, fd);
 	cub = fill_map_infos(fd, cub);
 	handle_error(check_duplicates(cub), 0);
-	// check_walls(cub);
+	check_walls(cub);
 	close(fd);
 	return (cub);
 }

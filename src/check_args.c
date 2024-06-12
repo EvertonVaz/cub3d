@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:11:11 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/10 15:04:36 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:44:15 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_checker(t_checker *checker)
 	checker->check_ceiling = 0;
 	checker->check_floor = 0;
 	checker->check_infos = 0;
+	checker->check_player = 0;
 }
 
 void	init_player(t_player *player)

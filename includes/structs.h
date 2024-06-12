@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/11 09:37:56 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:43:44 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_checker
 	int			check_floor;
 	int			check_ceiling;
 	int			check_infos;
+	int			check_player;
 }				t_checker;
 
 typedef struct s_mlx
