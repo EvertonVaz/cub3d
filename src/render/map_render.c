@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 12:02:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:56:29 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int32_t	minimap_color(t_cub *cub, int x, int y)
 {
 	if ((int)cub->player->x == x && (int)cub->player->y == y)
 		return (ft_pixel(255, 0, 0, 255));
+	printf("cub->map[y][x]: %c, y: %d, x%d\n", cub->map[y][x], y, x);
 	if (cub->map && cub->map[y][x] && cub->map[y][x] == '0')
 		return (ft_pixel(255, 255, 255, 255));
 	return (ft_pixel(0, 0, 0, 255));
@@ -65,6 +66,7 @@ void	render(void *param)
 	t_cub	*cub;
 	int		x;
 	int		y;
+	int		width;
 
 	cub = (t_cub *)param;
 	paint_background(cub);
@@ -73,7 +75,8 @@ void	render(void *param)
 	while (++y < cub->map_height)
 	{
 		x = -1;
-		while (++x < cub->map_width)
+		width = ft_strlen(cub->map[y]) - 1;
+		while (++x < width)
 			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, minimap_color(cub, x, y));
 	}
 }
