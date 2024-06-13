@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 17:17:06 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:29:42 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	open_texture(t_cub *cub)
 	cub->texture->s_tex = mlx_load_png(cub->so_texture);
 	cub->texture->n_tex = mlx_load_png(cub->no_texture);
 	cub->texture->w_tex = mlx_load_png(cub->we_texture);
+	if (!cub->texture->e_tex || !cub->texture->s_tex || !cub->texture->n_tex
+		|| !cub->texture->w_tex)
+		handle_error("Error\nSomething went wrong while loading the images :(\n",
+			0);
 }
 
 t_cub	*get_map_infos(int argc, char **argv)
