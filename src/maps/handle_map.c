@@ -6,41 +6,41 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:11:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 09:44:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:10:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-t_map	*get_map_address(t_map *map)
+t_cub	*get_address(t_cub *cub)
 {
-	static t_map	*map_address;
+	static t_cub	*map_address;
 
 	if (!map_address)
-		map_address = map;
+		map_address = cub;
 	return (map_address);
 }
 
-t_map	*fill_width_height(t_map *map)
+t_cub	*fill_width_height(t_cub *cub)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (map->map[y])
+	while (cub->map[y])
 	{
 		x = 0;
-		while (map->map[y][x])
+		while (cub->map[y][x])
 		{
-			get_player_posicion(map, x, y);
+			get_player_posicion(cub, x, y);
 			x++;
 		}
-		if (map->map_width < x)
-			map->map_width = x;
+		if (cub->map_width < x)
+			cub->map_width = x;
 		y++;
 	}
-	map->map_height = y;
-	return (map);
+	cub->map_height = y;
+	return (cub);
 }
 
 char	**handle_map(char *line, int fd)
@@ -72,7 +72,7 @@ char	**handle_map(char *line, int fd)
 	return (map);
 }
 
-void	check_map_infos(char *line, t_map *map)
+void	check_map_infos(char *line, t_cub *cub)
 {
 	char	**splited_line;
 	char	*trim;
@@ -82,33 +82,31 @@ void	check_map_infos(char *line, t_map *map)
 	splited_line = ft_split(line, ' ');
 	trim = ft_strtrim(splited_line[0], " WAESONCF\n");
 	if (trim && *trim)
-		map->checker->check_infos = 1;
+		cub->checker->check_infos = 1;
 	free(trim);
 	free_split(splited_line);
 }
 
-t_map	*fill_map_infos(int fd)
+t_cub	*fill_map_infos(int fd, t_cub *cub)
 {
-	t_map	*map;
 	char	*line;
 
-	map = get_map_address(NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (map);
+			return (cub);
 		line[ft_strlen(line) - 1] = '\0';
-		handle_texture(&map, line);
+		handle_texture(&cub, line);
 		if (ft_strchr(line, 'C'))
-			map->ceiling_color = get_colors(&map, line, 'C');
+			cub->ceiling_color = get_colors(&cub, line, 'C');
 		else if (ft_strchr(line, 'F'))
-			map->floor_color = get_colors(&map, line, 'F');
+			cub->floor_color = get_colors(&cub, line, 'F');
 		else
-			map->map = handle_map(line, fd);
-		if (map->map)
-			return (fill_width_height(map));
-		check_map_infos(line, map);
+			cub->map = handle_map(line, fd);
+		if (cub->map)
+			return (fill_width_height(cub));
+		check_map_infos(line, cub);
 		free(line);
 	}
 	return (NULL);

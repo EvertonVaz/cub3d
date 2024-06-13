@@ -3,23 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 09:46:37 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:58:20 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	get_player_posicion(t_map *map, int x, int y)
+void	phill_direction(double plax, double play, double dirx, double diry)
 {
-	if (map->map[y][x] == 'N' || map->map[y][x] == 'S'
-		|| map->map[y][x] == 'W' || map->map[y][x] == 'E')
+	t_player	*player;
+
+	player = get_address(NULL)->player;
+	player->plane_x = plax;
+	player->plane_y = play;
+	player->dir_x = dirx;
+	player->dir_y = diry;
+}
+
+void	player_direction(char direction)
+{
+	if (direction == 'N')
+		return (phill_direction(0.66, 0, 0, -1));
+	if (direction == 'S')
+		return (phill_direction(-0.66, 0, 0, 1));
+	if (direction == 'E')
+		return (phill_direction(0, 0.66, 1, 0));
+	if (direction == 'W')
+		return (phill_direction(0, -0.66, -1, 0));
+}
+
+void	get_player_posicion(t_cub *cub, int x, int y)
+{
+	char	*side;
+
+	side = "NSWE";
+	if (ft_strchr(side, cub->map[y][x]))
 	{
-		map->player->direction = map->map[y][x];
-		map->player->x = x;
-		map->player->y = y;
-		map->map[y][x] = '0';
+		cub->checker->check_player++;
+		player_direction(cub->map[y][x]);
+		cub->player->direction = cub->map[y][x];
+		cub->player->x = (double)x + 0.5;
+		cub->player->y = (double)y + 0.5;
+		cub->map[y][x] = '0';
 	}
 }

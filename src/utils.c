@@ -6,42 +6,61 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/05 17:22:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:09:59 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	free_maps(t_map **map)
+void	destroy_texture(t_cub *cub)
 {
-	if (map && (*map)->path_map)
-		free((*map)->path_map);
-	if (map && (*map)->ea_texture)
-		free((*map)->ea_texture);
-	if (map && (*map)->we_texture)
-		free((*map)->we_texture);
-	if (map && (*map)->no_texture)
-		free((*map)->no_texture);
-	if (map && (*map)->so_texture)
-		free((*map)->so_texture);
-	if (map && (*map)->map)
-		free_split((*map)->map);
-	if (map && (*map)->checker)
-		free((*map)->checker);
-	if (map && (*map)->player)
-		free((*map)->player);
-	if (map && *map)
-		free(*map);
+	if (cub && cub->texture->n_tex)
+		mlx_delete_texture(cub->texture->n_tex);
+	if (cub && cub->texture->s_tex)
+		mlx_delete_texture(cub->texture->s_tex);
+	if (cub && cub->texture->w_tex)
+		mlx_delete_texture(cub->texture->w_tex);
+	if (cub && cub->texture->e_tex)
+		mlx_delete_texture(cub->texture->e_tex);
+}
+
+void	free_maps(t_cub **cub)
+{
+	if (cub && (*cub)->path_map)
+		free((*cub)->path_map);
+	if (cub && (*cub)->ea_texture)
+		free((*cub)->ea_texture);
+	if (cub && (*cub)->we_texture)
+		free((*cub)->we_texture);
+	if (cub && (*cub)->no_texture)
+		free((*cub)->no_texture);
+	if (cub && (*cub)->so_texture)
+		free((*cub)->so_texture);
+	if (cub && (*cub)->map)
+		free_split((*cub)->map);
+	if (cub && (*cub)->checker)
+		free((*cub)->checker);
+	if (cub && (*cub)->player)
+		free((*cub)->player);
+	if (cub && (*cub)->mlx)
+		free((*cub)->mlx);
+	if (cub && (*cub)->ray)
+		free((*cub)->ray);
+	destroy_texture((*cub));
+	if (cub && (*cub)->texture)
+		free((*cub)->texture);
+	if (cub && *cub)
+		free(*cub);
 }
 
 int	handle_error(char *msg, int num)
 {
-	t_map	*map;
+	t_cub	*cub;
 
-	map = get_map_address(NULL);
+	cub = get_address(NULL);
 	if (num == -1)
 	{
-		free_maps(&map);
+		free_maps(&cub);
 		msg = ft_strjoin("Error\n", strerror(errno), 0);
 		write(2, msg, ft_strlen(msg));
 		write(2, "\n", 1);
@@ -50,7 +69,7 @@ int	handle_error(char *msg, int num)
 	}
 	if (msg)
 	{
-		free_maps(&map);
+		free_maps(&cub);
 		write(2, msg, ft_strlen(msg));
 		exit(1);
 	}

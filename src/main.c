@@ -3,48 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/06 10:02:34 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:28:02 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-t_map	*get_map_infos(int argc, char **argv)
+void	open_texture(t_cub *cub)
 {
-	t_map	*map;
-	int		fd;
-
-	map = get_map_address(NULL);
-	fd = open(map->path_map, O_RDONLY);
-	handle_error(NULL, fd);
-	map = fill_map_infos(fd);
-	handle_error(check_duplicates(map), 0);
-	check_walls(map);
-	close(fd);
-	map->map[map->player->y][map->player->x] = map->player->direction;
-	return (map);
+	cub->texture->e_tex = mlx_load_png(cub->ea_texture);
+	cub->texture->s_tex = mlx_load_png(cub->so_texture);
+	cub->texture->n_tex = mlx_load_png(cub->no_texture);
+	cub->texture->w_tex = mlx_load_png(cub->we_texture);
 }
 
-void	print_map(t_map *map)
+t_cub	*get_map_infos(int argc, char **argv)
 {
-	int	y;
+	t_cub	*cub;
+	int		fd;
 
-	y = -1;
-	while (map->map[++y])
-		printf("%s\n", map->map[y]);
+	cub = check_args_init_data(argc, argv);
+	fd = open(cub->path_map, O_RDONLY);
+	handle_error(NULL, fd);
+	cub = fill_map_infos(fd, cub);
+	handle_error(check_duplicates(cub), 0);
+	check_walls(cub);
+	open_texture(cub);
+	close(fd);
+	return (cub);
 }
 
 int	main(int argc, char **argv)
 {
-	t_map		*map;
-	t_screen	*screen;
+	t_cub	*cub;
 
-	map = get_map_infos(argc, argv);
-	print_map(map);
-	printf("O PROGRAMA CHEGOU NO FIM! %s\n", map->path_map);
-	free_maps(&map);
+	cub = get_map_infos(argc, argv);
+	cub->mlx->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	cub->mlx->img = mlx_new_image(cub->mlx->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(cub->mlx->mlx, cub->mlx->img, 0, 0);
+	mlx_set_icon(cub->mlx->mlx, cub->texture->e_tex);
+	render(cub);
+	mlx_key_hook(cub->mlx->mlx, player_walk, cub);
+	mlx_loop(cub->mlx->mlx);
+	mlx_terminate(cub->mlx->mlx);
+	free_maps(&cub);
 	return (0);
 }

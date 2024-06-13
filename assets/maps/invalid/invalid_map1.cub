@@ -1,8 +1,8 @@
 
-EA ./assets/textures/ea_test.img
-NO ./assets/textures/no_test.img
-SO ./assets/textures/so_test.img
-WE ./assets/textures/we_test.img
+EA ./assets/textures/ea_texture.png
+NO ./assets/textures/no_texture.png
+SO ./assets/textures/so_texture.png
+WE ./assets/textures/we_texture.png
 
 F 220,100,0
 C 225,30,0

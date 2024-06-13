@@ -1,6 +1,6 @@
-EA ./assets/textures/ea_test.img
-NO ./assets/textures/no_test.img
-SO ./assets/textures/so_test.img
+EA ./assets/textures/ea_texture.png
+NO ./assets/textures/no_texture.png
+SO ./assets/textures/so_texture.png
 WE 
 
 F 220,100,0
