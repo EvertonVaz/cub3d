@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 18:29:42 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 18:50:30 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void	open_texture(t_cub *cub)
 		|| !cub->texture->w_tex)
 		handle_error("Error\nSomething went wrong while loading the images :(\n",
 			0);
+	if(cub->texture->e_tex->width != 64 || cub->texture->e_tex->height != 64)
+		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
+	if(cub->texture->s_tex->width != 64 || cub->texture->s_tex->height != 64)
+		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
+	if(cub->texture->n_tex->width != 64 || cub->texture->n_tex->height != 64)
+		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
+	if(cub->texture->w_tex->width != 64 || cub->texture->w_tex->height != 64)
+		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
 }
 
 t_cub	*get_map_infos(int argc, char **argv)
