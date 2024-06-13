@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 11:35:09 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:01:03 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	hit(t_cub *cub)
 		ray->side = 1;
 	}
 	if (cub->map[ray->map_y][ray->map_x] != '0')
-			ray->hit = 1;
+		ray->hit = 1;
 	return (ray->hit);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 09:42:27 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 16:21:56 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:58:20 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	phill_direction(double plax, double play, double dirx, double diry)
 void	player_direction(char direction)
 {
 	if (direction == 'N')
-		return(phill_direction(0.66, 0, 0, -1));
+		return (phill_direction(0.66, 0, 0, -1));
 	if (direction == 'S')
-		return(phill_direction(-0.66, 0, 0, 1));
+		return (phill_direction(-0.66, 0, 0, 1));
 	if (direction == 'E')
-		return(phill_direction(0, 0.66, 1, 0));
+		return (phill_direction(0, 0.66, 1, 0));
 	if (direction == 'W')
-		return(phill_direction(0, -0.66, -1, 0));
+		return (phill_direction(0, -0.66, -1, 0));
 }
 
 void	get_player_posicion(t_cub *cub, int x, int y)

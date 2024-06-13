@@ -1,8 +1,8 @@
 
-EA ./assets/textures/ea_test.img
-NO ./assets/textures/no_test.img
-SO ./assets/textures/so_test.img
-WE ./assets/textures/we_test.img
+EA ./assets/textures/ea_texture.png
+NO ./assets/textures/no_texture.png
+SO ./assets/textures/so_texture.png
+WE ./assets/textures/we_texture.png
 
 F 220,100,0
 C 225,30,0
@@ -17,7 +17,7 @@ C 225,30,0
    11111110111111111011100000010001
 11110111111111011101010010001111111
 11000000110101011100000010001
-10000000000000001100000010001
+10000S0000000000110000001N001
 10000000000000001101010010001
 11000001110101011111011110001
 11110111 1110101 101111010001

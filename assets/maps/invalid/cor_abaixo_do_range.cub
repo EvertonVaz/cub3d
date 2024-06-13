@@ -1,10 +1,10 @@
 F 220,100,0
 C                                 225,30,-1
 
-EA ./assets/textures/ea_test.img
-NO ./assets/textures/no_test.img
-SO ./assets/textures/so_test.img
-WE ./assets/textures/we_test.img
+EA ./assets/textures/ea_texture.png
+NO ./assets/textures/no_texture.png
+SO ./assets/textures/so_texture.png
+WE ./assets/textures/we_texture.png
 
         1111111111111111111111111
         1000000000110000000000001

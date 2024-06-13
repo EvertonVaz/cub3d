@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 10:49:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:00:40 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*check_side(char *identifier, char *side)
 
 int	verify_texture_path(char*texture)
 {
-	int fd;
+	int	fd;
 
 	fd = open(texture, O_RDONLY);
 	if (fd < 0)
@@ -49,7 +49,7 @@ void	fill_texture(t_cub **cub, char *side, char *texture)
 			*texture_map[i].check += verify_texture_path(texture);
 		}
 		i++;
-	};
+	}
 }
 
 int	handle_texture(t_cub **cub, char *line)

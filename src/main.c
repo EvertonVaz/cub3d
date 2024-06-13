@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 10:48:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:57:35 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_cub	*get_map_infos(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_cub		*cub;
+	t_cub	*cub;
 
 	cub = get_map_infos(argc, argv);
 	cub->mlx->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
@@ -46,10 +46,8 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(cub->mlx->mlx, cub->mlx->img, 0, 0);
 	render(cub);
 	mlx_key_hook(cub->mlx->mlx, player_walk, cub);
-
 	mlx_loop(cub->mlx->mlx);
 	mlx_terminate(cub->mlx->mlx);
-	printf("O PROGRAMA CHEGOU NO FIM! %s\n", cub->path_map); // remover
 	free_maps(&cub);
 	return (0);
 }

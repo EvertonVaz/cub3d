@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 14:21:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:03:30 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	mini_map(t_cub *cub, int x, int y, int32_t color)
 
 void	paint_background(t_cub *cub)
 {
-	int	half = HEIGHT / 2;
+	int	half;
 	int	x;
 	int	y;
 
+	half = HEIGHT / 2;
 	y = -1;
 	while (++y <= half)
 	{
@@ -78,8 +79,9 @@ void	render(void *param)
 		while (++x < width)
 		{
 			if (cub->map && cub->map[y][x] && cub->map[y][x] == ' ')
-				continue;
-			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, minimap_color(cub, x, y));
+				continue ;
+			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, minimap_color(cub, x,
+					y));
 		}
 	}
 }
