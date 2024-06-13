@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 11:25:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:16:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	player_walk(mlx_key_data_t key, void *param);
 void	raycasting(t_cub *cub);
 int32_t	select_color(t_cub *cub, int x, int y);
 void	calculate_texture_coordinates(t_cub *cub);
+void	rotate_player(t_player *p, double rot_speed);
+void	mouse_move(double xpos, double ypos, void *param);
 
 #endif

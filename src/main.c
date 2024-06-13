@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 16:28:02 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 17:17:06 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 	mlx_set_icon(cub->mlx->mlx, cub->texture->e_tex);
 	render(cub);
 	mlx_key_hook(cub->mlx->mlx, player_walk, cub);
+	mlx_cursor_hook(cub->mlx->mlx, mouse_move, cub);
 	mlx_loop(cub->mlx->mlx);
 	mlx_terminate(cub->mlx->mlx);
 	free_maps(&cub);

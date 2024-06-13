@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_walk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 16:29:02 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 17:12:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	walk(t_cub *cub, double new_x, double new_y)
 		cub->player->y = new_y;
 }
 
-int	up_down(t_cub *cub)
+int	player_move(t_cub *cub)
 {
 	double		x;
 	double		y;
@@ -45,20 +45,17 @@ int	up_down(t_cub *cub)
 	return (y != p->y || x != p->x);
 }
 
-void	rotate_player(t_player *player, double rot_speed)
+void	rotate_player(t_player *p, double rot_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
 
-	old_dir_x = player->dir_x;
-	player->dir_x = player->dir_x * cos(rot_speed) - player->dir_y
-		* sin(rot_speed);
-	player->dir_y = old_dir_x * sin(rot_speed) + player->dir_y * cos(rot_speed);
-	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(rot_speed) - player->plane_y
-		* sin(rot_speed);
-	player->plane_y = old_plane_x * sin(rot_speed) + player->plane_y
-		* cos(rot_speed);
+	old_dir_x = p->dir_x;
+	p->dir_x = p->dir_x * cos(rot_speed) - p->dir_y * sin(rot_speed);
+	p->dir_y = old_dir_x * sin(rot_speed) + p->dir_y * cos(rot_speed);
+	old_plane_x = p->plane_x;
+	p->plane_x = p->plane_x * cos(rot_speed) - p->plane_y * sin(rot_speed);
+	p->plane_y = old_plane_x * sin(rot_speed) + p->plane_y * cos(rot_speed);
 }
 
 int	rotate(t_cub *cub)
@@ -83,7 +80,7 @@ void	player_walk(mlx_key_data_t key, void *param)
 	cub = (t_cub *)param;
 	if (key.key == MLX_KEY_ESCAPE)
 		mlx_close_window(cub->mlx->mlx);
-	moviment = rotate(cub) || up_down(cub);
+	moviment = rotate(cub) || player_move(cub);
 	if (moviment)
 		render(cub);
 }
