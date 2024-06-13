@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:11:11 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 11:38:13 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:12:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ t_cub	*init_data(void)
 	cub->mlx = malloc(sizeof(t_mlx));
 	cub->ray = malloc(sizeof(t_ray));
 	cub->texture = malloc(sizeof(t_textures));
+	cub->texture->e_tex = NULL;
+	cub->texture->n_tex = NULL;
+	cub->texture->s_tex = NULL;
+	cub->texture->w_tex = NULL;
 	return (get_address(cub));
 }
 

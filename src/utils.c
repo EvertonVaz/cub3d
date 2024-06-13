@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 14:00:28 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:09:59 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	destroy_texture(t_cub *cub)
 		mlx_delete_texture(cub->texture->w_tex);
 	if (cub && cub->texture->e_tex)
 		mlx_delete_texture(cub->texture->e_tex);
-	free(cub->texture);
 }
 
 void	free_maps(t_cub **cub)
@@ -47,8 +46,9 @@ void	free_maps(t_cub **cub)
 		free((*cub)->mlx);
 	if (cub && (*cub)->ray)
 		free((*cub)->ray);
+	destroy_texture((*cub));
 	if (cub && (*cub)->texture)
-		destroy_texture((*cub));
+		free((*cub)->texture);
 	if (cub && *cub)
 		free(*cub);
 }
