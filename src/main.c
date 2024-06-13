@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 15:57:35 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 16:28:02 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	cub->mlx->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	cub->mlx->img = mlx_new_image(cub->mlx->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(cub->mlx->mlx, cub->mlx->img, 0, 0);
+	mlx_set_icon(cub->mlx->mlx, cub->texture->e_tex);
 	render(cub);
 	mlx_key_hook(cub->mlx->mlx, player_walk, cub);
 	mlx_loop(cub->mlx->mlx);
