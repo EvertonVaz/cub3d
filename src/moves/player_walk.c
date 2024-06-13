@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 15:58:50 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 16:25:54 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,25 @@ void	walk(t_cub *cub, double new_x, double new_y)
 
 int	up_down(t_cub *cub)
 {
-	double	x;
-	double	y;
-	double	new_x;
-	double	new_y;
+	double	    x;
+	double	    y;
+    t_player    *player;
 
 	x = cub->player->x;
 	y = cub->player->y;
+    p = cub->player;
 	if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_W))
-	{
-		new_x = x + cub->player->dir_x * SPEED;
-		new_y = y + cub->player->dir_y * SPEED;
-		walk(cub, new_x, new_y);
-	}
+		walk(cub, x + cub->player->dir_x * SPEED, y + cub->player->dir_y
+			* SPEED);
 	else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_S))
-	{
-		new_x = x - cub->player->dir_x * SPEED;
-		new_y = y - cub->player->dir_y * SPEED;
-		walk(cub, new_x, new_y);
-	}
+		walk(cub, x - cub->player->dir_x * SPEED, y - cub->player->dir_y
+			* SPEED);
+	if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_A))
+		walk(cub, x - cub->player->plane_x * SPEED, y - cub->player->plane_y
+			* SPEED);
+	else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_D))
+		walk(cub, x + cub->player->plane_x * SPEED, y + cub->player->plane_y
+			* SPEED);
 	return (y != cub->player->y || x != cub->player->x);
 }
 
@@ -67,12 +67,16 @@ void	rotate_player(t_player *player, double rot_speed)
 
 int	rotate(t_cub *cub)
 {
-	if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_A))
-		rotate_player(cub->player, -SPEED);
-	else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_D))
+	double	dirx;
+	double	diry;
+
+	dirx = cub->player->dir_x;
+	diry = cub->player->dir_y;
+	if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_RIGHT))
 		rotate_player(cub->player, SPEED);
-	return (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_A)
-		|| mlx_is_key_down(cub->mlx->mlx, MLX_KEY_D));
+	else if (mlx_is_key_down(cub->mlx->mlx, MLX_KEY_LEFT))
+		rotate_player(cub->player, -SPEED);
+	return (cub->player->dir_x != dirx || cub->player->dir_y != diry);
 }
 
 void	player_walk(mlx_key_data_t key, void *param)
