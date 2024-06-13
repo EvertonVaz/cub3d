@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 16:11:38 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:25:10 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define HEIGHT 800
 # define TILE_SIZE 8
 # define SPEED 0.1
+# define TEX_SIZE 64
 
 t_cub	*check_args_init_data(int argc, char **argv);
 t_cub	*get_address(t_cub *cub);
@@ -42,10 +43,10 @@ int32_t	save_colors(char **colors, t_cub **cub, char identifier);
 void	check_walls(t_cub *cub);
 void	get_player_posicion(t_cub *cub, int x, int y);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-void	draw_map(void *param);
+void	render(void *param);
 void	player_walk(mlx_key_data_t key, void *param);
 void	raycasting(t_cub *cub);
-int		hit(t_cub *cub);
-void	paint_background(t_cub *cub);
+int32_t	select_color(t_cub *cub, int x, int y);
+void	calculate_texture_coordinates(t_cub *cub);
 
 #endif

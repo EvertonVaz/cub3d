@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:19:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 11:06:53 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 09:48:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void	player_walk(mlx_key_data_t key, void *param)
 		mlx_close_window(cub->mlx->mlx);
     moviment = rotate(cub) || up_down(cub);
 	if (moviment)
-		draw_map(cub);
+		render(cub);
 }

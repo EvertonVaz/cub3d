@@ -6,17 +6,17 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 11:29:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:02:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-int32_t	color_choice(t_cub cub, int x, int y)
+int32_t	minimap_color(t_cub *cub, int x, int y)
 {
-	if ((int)cub.player->x == x && (int)cub.player->y == y)
+	if ((int)cub->player->x == x && (int)cub->player->y == y)
 		return (ft_pixel(255, 0, 0, 255));
-	if (cub.map[y][x] == '0')
+	if (cub->map && cub->map[y][x] && cub->map[y][x] == '0')
 		return (ft_pixel(255, 255, 255, 255));
 	return (ft_pixel(0, 0, 0, 255));
 }
@@ -60,23 +60,20 @@ void	paint_background(t_cub *cub)
 	}
 }
 
-void	draw_map(void *param)
+void	render(void *param)
 {
 	t_cub	*cub;
 	int		x;
 	int		y;
 
 	cub = (t_cub *)param;
-	printf("Player position: x = %d, y = %d\n", (int)cub->player->x, (int)cub->player->y);
-	printf("Player direction: x = %f, y = %f\n", cub->player->dir_x, cub->player->dir_y);
-	printf("Player plane: x = %f, y = %f\n", cub->player->plane_x, cub->player->plane_y);
-	y = -1;
 	paint_background(cub);
 	raycasting(cub);
+	y = -1;
 	while (++y < cub->map_height)
 	{
 		x = -1;
 		while (++x < cub->map_width)
-			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, color_choice(*cub, x, y));
+			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, minimap_color(cub, x, y));
 	}
 }

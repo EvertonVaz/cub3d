@@ -6,11 +6,24 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:13:20 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 16:10:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:43:09 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	destroy_texture(t_cub *cub)
+{
+	if (cub && cub->texture->n_tex)
+		mlx_delete_texture(cub->texture->n_tex);
+	if (cub && cub->texture->s_tex)
+		mlx_delete_texture(cub->texture->s_tex);
+	if (cub && cub->texture->w_tex)
+		mlx_delete_texture(cub->texture->w_tex);
+	if (cub && cub->texture->e_tex)
+		mlx_delete_texture(cub->texture->e_tex);
+	free(cub->texture);
+}
 
 void	free_maps(t_cub **cub)
 {
@@ -30,6 +43,12 @@ void	free_maps(t_cub **cub)
 		free((*cub)->checker);
 	if (cub && (*cub)->player)
 		free((*cub)->player);
+	if (cub && (*cub)->mlx)
+		free((*cub)->mlx);
+	if (cub && (*cub)->ray)
+		free((*cub)->ray);
+	if (cub && (*cub)->texture)
+		destroy_texture((*cub));
 	if (cub && *cub)
 		free(*cub);
 }

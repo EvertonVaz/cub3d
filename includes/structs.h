@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/12 18:43:44 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 11:20:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,18 @@ typedef struct s_ray
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
+	double		wallX;
+	int			texX;
 }				t_ray;
 
-typedef struct s_sprites
+typedef struct s_textures
 {
 	mlx_texture_t	*e_tex;
-	mlx_image_t		*e_tex1;
 	mlx_texture_t	*w_tex;
-	mlx_image_t		*w_tex1;
 	mlx_texture_t	*s_tex;
-	mlx_image_t		*s_tex1;
 	mlx_texture_t	*n_tex;
-	mlx_image_t		*n_tex1;
-	
-}					t_sprites;
+
+}					t_textures;
 
 typedef struct s_cub
 {
@@ -97,7 +95,7 @@ typedef struct s_cub
 	t_checker	*checker;
 	t_player	*player;
 	t_ray		*ray;
-	t_sprites	*sprites;
+	t_textures	*texture;
 }				t_cub;
 
 typedef struct s_texture_map
