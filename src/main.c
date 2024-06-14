@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:13:45 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 18:50:30 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/14 11:04:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	check_img_size(mlx_texture_t *img)
+{
+	if (!img)
+		handle_error("Error\nSomething went wrong while loading images\n", 0);
+	if (img->width != 64 || img->height != 64)
+		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
+}
 
 void	open_texture(t_cub *cub)
 {
@@ -18,18 +26,10 @@ void	open_texture(t_cub *cub)
 	cub->texture->s_tex = mlx_load_png(cub->so_texture);
 	cub->texture->n_tex = mlx_load_png(cub->no_texture);
 	cub->texture->w_tex = mlx_load_png(cub->we_texture);
-	if (!cub->texture->e_tex || !cub->texture->s_tex || !cub->texture->n_tex
-		|| !cub->texture->w_tex)
-		handle_error("Error\nSomething went wrong while loading the images :(\n",
-			0);
-	if(cub->texture->e_tex->width != 64 || cub->texture->e_tex->height != 64)
-		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
-	if(cub->texture->s_tex->width != 64 || cub->texture->s_tex->height != 64)
-		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
-	if(cub->texture->n_tex->width != 64 || cub->texture->n_tex->height != 64)
-		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
-	if(cub->texture->w_tex->width != 64 || cub->texture->w_tex->height != 64)
-		handle_error("Error\nPlease provide a image with size 64x64 :)\n", 0);
+	check_img_size(cub->texture->e_tex);
+	check_img_size(cub->texture->s_tex);
+	check_img_size(cub->texture->n_tex);
+	check_img_size(cub->texture->w_tex);
 }
 
 t_cub	*get_map_infos(int argc, char **argv)
