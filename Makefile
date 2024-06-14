@@ -11,8 +11,8 @@ WHITE = "\033[37;1;4m"
 COLOR_LIMITER = "\033[0m"
 
 # Paths for libraries
-LIBMLX_PATH		:= ./libs/MLX42
-LIBFT_PATH		:= ./libs/libft/
+LIBMLX_PATH		:= ./.libs/MLX42
+LIBFT_PATH		:= ./.libs/libft/
 BIN_PATH		:= ./bin/
 LIBFT			:= libft.a
 
@@ -62,11 +62,11 @@ $(BIN_PATH):
 clean:
 	@echo $(RED)[Removing Objects]$(COLOR_LIMITER)
 	@rm -rf $(BIN_PATH)
-	@make clean -sC ./libs/libft --no-print-directory
+	@make clean -sC ./.libs/libft --no-print-directory
 
 fclean: clean
 	@echo $(RED)[Removing $(NAME) executable]$(COLOR_LIMITER)
-	@rm -rf ./libs/libft/libft.a
+	@rm -rf ./.libs/libft/libft.a
 	@rm -rf $(NAME)
 
 

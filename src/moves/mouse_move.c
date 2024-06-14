@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 17:08:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 18:30:06 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/14 07:28:04 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ int	mouse_rotate(double xpos, double ypos, t_cub *cub)
 {
 	static double	old_x;
 	double			dirx;
-	double			diry;
 	double			delta_x;
 	double			sensitivity;
 
 	(void)ypos;
-	old_x = 1;
-	sensitivity = 0.008;
+	sensitivity = 0.01;
 	dirx = cub->player->dir_x;
-	diry = cub->player->dir_y;
 	if (old_x < 0)
 		old_x = xpos;
 	delta_x = xpos - old_x;
@@ -33,7 +30,7 @@ int	mouse_rotate(double xpos, double ypos, t_cub *cub)
 		rotate_player(cub->player, delta_x * sensitivity);
 		old_x = xpos;
 	}
-	return (cub->player->dir_x != dirx || cub->player->dir_y != diry);
+	return (cub->player->dir_x != dirx);
 }
 
 void	mouse_move(double xpos, double ypos, void *param)

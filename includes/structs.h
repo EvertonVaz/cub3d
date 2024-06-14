@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:00:15 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 11:20:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/14 07:34:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "../libs/MLX42/include/MLX42/MLX42.h"
+# include "../.libs/MLX42/include/MLX42/MLX42.h"
 # include <stdint.h>
 
 typedef struct s_player
@@ -66,8 +66,8 @@ typedef struct s_ray
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
-	double		wallX;
-	int			texX;
+	double		wall_x;
+	int			tex_x;
 }				t_ray;
 
 typedef struct s_textures

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:44:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 16:03:30 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/13 19:00:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-int32_t	minimap_color(t_cub *cub, int x, int y)
+int32_t	mini_color(t_cub *cub, int x, int y)
 {
 	if ((int)cub->player->x == x && (int)cub->player->y == y)
 		return (ft_pixel(255, 0, 0, 255));
@@ -80,8 +80,7 @@ void	render(void *param)
 		{
 			if (cub->map && cub->map[y][x] && cub->map[y][x] == ' ')
 				continue ;
-			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, minimap_color(cub, x,
-					y));
+			mini_map(cub, x * TILE_SIZE, y * TILE_SIZE, mini_color(cub, x, y));
 		}
 	}
 }

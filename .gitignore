@@ -5,3 +5,4 @@ bin/
 **libft.a
 build/
 a.out
+.tests/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:51:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 16:01:03 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/14 07:34:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_line(t_cub *cub, int x)
 		ray->draw_end = HEIGHT - 1;
 	while (ray->draw_start < ray->draw_end)
 	{
-		color = select_color(cub, ray->texX, ray->draw_start);
+		color = select_color(cub, ray->tex_x, ray->draw_start);
 		mlx_put_pixel(cub->mlx->img, x, ray->draw_start, color);
 		ray->draw_start++;
 	}

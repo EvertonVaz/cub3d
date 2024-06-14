@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycating_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:07:50 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 16:03:18 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/14 07:34:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	calculate_texture_coordinates(t_cub *cub)
 
 	ray = cub->ray;
 	if (ray->side == 0)
-		ray->wallX = cub->player->y + ray->perp_wall_dist * ray->dir_y;
+		ray->wall_x = cub->player->y + ray->perp_wall_dist * ray->dir_y;
 	else
-		ray->wallX = cub->player->x + ray->perp_wall_dist * ray->dir_x;
-	ray->wallX -= floor(ray->wallX);
-	ray->texX = (int)(ray->wallX * (double)TEX_SIZE);
+		ray->wall_x = cub->player->x + ray->perp_wall_dist * ray->dir_x;
+	ray->wall_x -= floor(ray->wall_x);
+	ray->tex_x = (int)(ray->wall_x * (double)TEX_SIZE);
 	if (ray->side == 0 && ray->dir_x > 0)
-		ray->texX = TEX_SIZE - ray->texX - 1;
+		ray->tex_x = TEX_SIZE - ray->tex_x - 1;
 	if (ray->side == 1 && ray->dir_y < 0)
-		ray->texX = TEX_SIZE - ray->texX - 1;
+		ray->tex_x = TEX_SIZE - ray->tex_x - 1;
 }
 
 int32_t	texture_to_color(mlx_texture_t *tex, int x, int y)
