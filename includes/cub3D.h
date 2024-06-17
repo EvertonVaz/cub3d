@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:29:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/14 14:02:55 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:55:12 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int32_t	select_color(t_cub *cub, int x, int y);
 void	calculate_texture_coordinates(t_cub *cub);
 void	rotate_player(t_player *p, double rot_speed);
 void	mouse_move(double xpos, double ypos, void *param);
+void	mini_map(t_cub *cub, int x, int y, int32_t color);
+int32_t	mini_color(t_cub *cub, int x, int y);
 
 #endif
