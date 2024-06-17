@@ -14,3 +14,5 @@ valgrind --leak-check=full --suppressions=supress.txt ./cub3D ./assets/maps/inva
 valgrind --leak-check=full --suppressions=supress.txt ./cub3D ./assets/maps/invalid/invalid_map1.cub
 valgrind --leak-check=full --suppressions=supress.txt ./cub3D ./assets/maps/invalid/invalid_map2.cub
 valgrind --leak-check=full --suppressions=supress.txt ./cub3D ./assets/maps/invalid/invalid_map3.cub
+valgrind --leak-check=full --suppressions=supress.txt ./cub3D ./assets/maps/example.cub
+valgrind --leak-check=full --suppressions=supress.txt ./cub3D ./assets/maps/42.cub

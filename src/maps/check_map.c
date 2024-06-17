@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:29:42 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/06/13 16:04:29 by natali           ###   ########.fr       */
+/*   Updated: 2024/06/17 11:50:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ void	check_diagonal(int y, int x)
 	cub = get_address(NULL);
 	if (cub->map[y - 1][x - 1] < '0' || cub->map[y - 1][x - 1] > '1')
 		handle_error("Error\nInvalid map,\
-			one upper left diagonal wall is open.\n", 0);
+ one upper left diagonal wall is open.\n", 0);
 	if (cub->map[y - 1][x + 1] < '0' || cub->map[y - 1][x + 1] > '1')
 		handle_error("Error\nInvalid map,\
-			one upper right diagonal wall is open.\n", 0);
+ one upper right diagonal wall is open.\n", 0);
 	if (cub->map[y + 1][x - 1] < '0' || cub->map[y + 1][x - 1] > '1')
 		handle_error("Error\nInvalid map,\
-			one lower left diagonal wall is open.\n", 0);
+ one lower left diagonal wall is open.\n", 0);
 	if (cub->map[y + 1][x + 1] < '0' || cub->map[y + 1][x + 1] > '1')
 		handle_error("Error\nInvalid map,\
-			one lower right diagonal wall is open.\n", 0);
+ one lower right diagonal wall is open.\n", 0);
 }
 
 void	check_walls(t_cub *cub)
